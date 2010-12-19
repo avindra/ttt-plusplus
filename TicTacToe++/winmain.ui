@@ -53,6 +53,12 @@
           <height>31</height>
          </size>
         </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>60</height>
+         </size>
+        </property>
         <property name="styleSheet">
          <string notr="true">background-color:blue;
 color:white;
@@ -130,11 +136,6 @@ font-size:24px;</string>
           <string>Impossible</string>
          </property>
         </widget>
-        <zorder>radEasy</zorder>
-        <zorder>radNormal</zorder>
-        <zorder>radHard</zorder>
-        <zorder>radDeath</zorder>
-        <zorder>grpOpp</zorder>
        </widget>
       </item>
       <item>
@@ -174,6 +175,9 @@ font-size:24px;</string>
           <string>Human</string>
          </property>
         </widget>
+        <zorder>radComputer_3</zorder>
+        <zorder>radHuman_3</zorder>
+        <zorder></zorder>
        </widget>
       </item>
       <item>

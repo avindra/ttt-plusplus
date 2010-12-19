@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'winmain.ui'
 **
-** Created: Sun Dec 19 14:00:56 2010
+** Created: Sun Dec 19 15:00:41 2010
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -98,6 +98,7 @@ public:
         lblTurn = new QLabel(centralWidget);
         lblTurn->setObjectName(QString::fromUtf8("lblTurn"));
         lblTurn->setMinimumSize(QSize(0, 31));
+        lblTurn->setMaximumSize(QSize(16777215, 60));
         lblTurn->setStyleSheet(QString::fromUtf8("background-color:blue;\n"
 "color:white;\n"
 "font-weight:bold;\n"
@@ -121,10 +122,6 @@ public:
         radDeath = new QRadioButton(grpDificil);
         radDeath->setObjectName(QString::fromUtf8("radDeath"));
         radDeath->setGeometry(QRect(10, 80, 82, 17));
-        radEasy->raise();
-        radNormal->raise();
-        radHard->raise();
-        radDeath->raise();
 
         verticalLayout->addWidget(grpDificil);
 
@@ -137,6 +134,8 @@ public:
         radHuman_3 = new QRadioButton(grpOpp);
         radHuman_3->setObjectName(QString::fromUtf8("radHuman_3"));
         radHuman_3->setGeometry(QRect(10, 40, 82, 17));
+        radComputer_3->raise();
+        radHuman_3->raise();
 
         verticalLayout->addWidget(grpOpp);
 
