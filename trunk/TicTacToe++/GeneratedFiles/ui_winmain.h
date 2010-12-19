@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'winmain.ui'
 **
-** Created: Sun Dec 19 13:07:02 2010
+** Created: Sun Dec 19 14:00:56 2010
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -16,6 +16,7 @@
 #include <QtGui/QButtonGroup>
 #include <QtGui/QGridLayout>
 #include <QtGui/QGroupBox>
+#include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
 #include <QtGui/QMainWindow>
@@ -25,6 +26,7 @@
 #include <QtGui/QRadioButton>
 #include <QtGui/QStatusBar>
 #include <QtGui/QToolBar>
+#include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -36,19 +38,21 @@ public:
     QAction *mnuExit;
     QAction *mnuAbout;
     QWidget *centralWidget;
-    QWidget *gridLayoutWidget;
+    QHBoxLayout *horizontalLayout_3;
     QGridLayout *grdGame;
-    QPushButton *pushButton;
-    QPushButton *pushButton_2;
-    QGroupBox *groupBox;
-    QRadioButton *radioButton_3;
-    QRadioButton *radioButton_4;
-    QRadioButton *radioButton_5;
-    QRadioButton *radioButton_6;
-    QGroupBox *groupBox_2;
-    QRadioButton *radioButton;
-    QRadioButton *radioButton_2;
-    QLabel *label;
+    QVBoxLayout *verticalLayout;
+    QLabel *lblTurn;
+    QGroupBox *grpDificil;
+    QRadioButton *radEasy;
+    QRadioButton *radNormal;
+    QRadioButton *radHard;
+    QRadioButton *radDeath;
+    QGroupBox *grpOpp;
+    QRadioButton *radComputer_3;
+    QRadioButton *radHuman_3;
+    QVBoxLayout *layBtns;
+    QPushButton *btnNew;
+    QPushButton *btnExit;
     QMenuBar *mnuMain;
     QMenu *mnuFile;
     QMenu *mnuHelp;
@@ -59,7 +63,15 @@ public:
     {
         if (winMainClass->objectName().isEmpty())
             winMainClass->setObjectName(QString::fromUtf8("winMainClass"));
-        winMainClass->resize(517, 389);
+        winMainClass->setWindowModality(Qt::NonModal);
+        winMainClass->resize(615, 572);
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(winMainClass->sizePolicy().hasHeightForWidth());
+        winMainClass->setSizePolicy(sizePolicy);
+        winMainClass->setSizeIncrement(QSize(0, 0));
+        winMainClass->setLayoutDirection(Qt::LeftToRight);
         winMainClass->setStyleSheet(QString::fromUtf8(""));
         mnuNewGame = new QAction(winMainClass);
         mnuNewGame->setObjectName(QString::fromUtf8("mnuNewGame"));
@@ -69,56 +81,88 @@ public:
         mnuAbout->setObjectName(QString::fromUtf8("mnuAbout"));
         centralWidget = new QWidget(winMainClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
-        gridLayoutWidget = new QWidget(centralWidget);
-        gridLayoutWidget->setObjectName(QString::fromUtf8("gridLayoutWidget"));
-        gridLayoutWidget->setGeometry(QRect(10, 10, 301, 311));
-        grdGame = new QGridLayout(gridLayoutWidget);
+        horizontalLayout_3 = new QHBoxLayout(centralWidget);
+        horizontalLayout_3->setSpacing(6);
+        horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        grdGame = new QGridLayout();
         grdGame->setSpacing(6);
-        grdGame->setContentsMargins(11, 11, 11, 11);
         grdGame->setObjectName(QString::fromUtf8("grdGame"));
-        grdGame->setContentsMargins(0, 0, 0, 0);
-        pushButton = new QPushButton(centralWidget);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(410, 290, 75, 23));
-        pushButton_2 = new QPushButton(centralWidget);
-        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
-        pushButton_2->setGeometry(QRect(410, 310, 75, 23));
-        groupBox = new QGroupBox(centralWidget);
-        groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        groupBox->setGeometry(QRect(370, 159, 120, 111));
-        radioButton_3 = new QRadioButton(groupBox);
-        radioButton_3->setObjectName(QString::fromUtf8("radioButton_3"));
-        radioButton_3->setGeometry(QRect(10, 20, 82, 17));
-        radioButton_4 = new QRadioButton(groupBox);
-        radioButton_4->setObjectName(QString::fromUtf8("radioButton_4"));
-        radioButton_4->setGeometry(QRect(10, 40, 82, 17));
-        radioButton_5 = new QRadioButton(groupBox);
-        radioButton_5->setObjectName(QString::fromUtf8("radioButton_5"));
-        radioButton_5->setGeometry(QRect(10, 60, 82, 17));
-        radioButton_6 = new QRadioButton(groupBox);
-        radioButton_6->setObjectName(QString::fromUtf8("radioButton_6"));
-        radioButton_6->setGeometry(QRect(10, 80, 82, 17));
-        groupBox_2 = new QGroupBox(centralWidget);
-        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
-        groupBox_2->setGeometry(QRect(370, 60, 120, 80));
-        radioButton = new QRadioButton(groupBox_2);
-        radioButton->setObjectName(QString::fromUtf8("radioButton"));
-        radioButton->setGeometry(QRect(10, 20, 82, 17));
-        radioButton_2 = new QRadioButton(groupBox_2);
-        radioButton_2->setObjectName(QString::fromUtf8("radioButton_2"));
-        radioButton_2->setGeometry(QRect(10, 40, 82, 17));
-        label = new QLabel(centralWidget);
-        label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(390, 10, 91, 41));
-        label->setStyleSheet(QString::fromUtf8("background-color:blue;\n"
+        grdGame->setSizeConstraint(QLayout::SetDefaultConstraint);
+
+        horizontalLayout_3->addLayout(grdGame);
+
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setSpacing(6);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        lblTurn = new QLabel(centralWidget);
+        lblTurn->setObjectName(QString::fromUtf8("lblTurn"));
+        lblTurn->setMinimumSize(QSize(0, 31));
+        lblTurn->setStyleSheet(QString::fromUtf8("background-color:blue;\n"
 "color:white;\n"
 "font-weight:bold;\n"
 "font-size:24px;"));
-        label->setAlignment(Qt::AlignCenter);
+        lblTurn->setAlignment(Qt::AlignCenter);
+
+        verticalLayout->addWidget(lblTurn);
+
+        grpDificil = new QGroupBox(centralWidget);
+        grpDificil->setObjectName(QString::fromUtf8("grpDificil"));
+        grpDificil->setMinimumSize(QSize(199, 116));
+        radEasy = new QRadioButton(grpDificil);
+        radEasy->setObjectName(QString::fromUtf8("radEasy"));
+        radEasy->setGeometry(QRect(10, 20, 82, 17));
+        radNormal = new QRadioButton(grpDificil);
+        radNormal->setObjectName(QString::fromUtf8("radNormal"));
+        radNormal->setGeometry(QRect(10, 40, 82, 17));
+        radHard = new QRadioButton(grpDificil);
+        radHard->setObjectName(QString::fromUtf8("radHard"));
+        radHard->setGeometry(QRect(10, 60, 82, 17));
+        radDeath = new QRadioButton(grpDificil);
+        radDeath->setObjectName(QString::fromUtf8("radDeath"));
+        radDeath->setGeometry(QRect(10, 80, 82, 17));
+        radEasy->raise();
+        radNormal->raise();
+        radHard->raise();
+        radDeath->raise();
+
+        verticalLayout->addWidget(grpDificil);
+
+        grpOpp = new QGroupBox(centralWidget);
+        grpOpp->setObjectName(QString::fromUtf8("grpOpp"));
+        grpOpp->setMinimumSize(QSize(199, 60));
+        radComputer_3 = new QRadioButton(grpOpp);
+        radComputer_3->setObjectName(QString::fromUtf8("radComputer_3"));
+        radComputer_3->setGeometry(QRect(10, 20, 82, 17));
+        radHuman_3 = new QRadioButton(grpOpp);
+        radHuman_3->setObjectName(QString::fromUtf8("radHuman_3"));
+        radHuman_3->setGeometry(QRect(10, 40, 82, 17));
+
+        verticalLayout->addWidget(grpOpp);
+
+        layBtns = new QVBoxLayout();
+        layBtns->setSpacing(0);
+        layBtns->setObjectName(QString::fromUtf8("layBtns"));
+        btnNew = new QPushButton(centralWidget);
+        btnNew->setObjectName(QString::fromUtf8("btnNew"));
+
+        layBtns->addWidget(btnNew);
+
+        btnExit = new QPushButton(centralWidget);
+        btnExit->setObjectName(QString::fromUtf8("btnExit"));
+
+        layBtns->addWidget(btnExit);
+
+
+        verticalLayout->addLayout(layBtns);
+
+
+        horizontalLayout_3->addLayout(verticalLayout);
+
         winMainClass->setCentralWidget(centralWidget);
         mnuMain = new QMenuBar(winMainClass);
         mnuMain->setObjectName(QString::fromUtf8("mnuMain"));
-        mnuMain->setGeometry(QRect(0, 0, 517, 21));
+        mnuMain->setGeometry(QRect(0, 0, 615, 21));
         mnuFile = new QMenu(mnuMain);
         mnuFile->setObjectName(QString::fromUtf8("mnuFile"));
         mnuHelp = new QMenu(mnuMain);
@@ -148,17 +192,17 @@ public:
         mnuNewGame->setText(QApplication::translate("winMainClass", "&New Game", 0, QApplication::UnicodeUTF8));
         mnuExit->setText(QApplication::translate("winMainClass", "E&xit", 0, QApplication::UnicodeUTF8));
         mnuAbout->setText(QApplication::translate("winMainClass", "&About", 0, QApplication::UnicodeUTF8));
-        pushButton->setText(QApplication::translate("winMainClass", "New Game", 0, QApplication::UnicodeUTF8));
-        pushButton_2->setText(QApplication::translate("winMainClass", "Exit Game", 0, QApplication::UnicodeUTF8));
-        groupBox->setTitle(QApplication::translate("winMainClass", "Difficulty", 0, QApplication::UnicodeUTF8));
-        radioButton_3->setText(QApplication::translate("winMainClass", "Easy", 0, QApplication::UnicodeUTF8));
-        radioButton_4->setText(QApplication::translate("winMainClass", "Normal", 0, QApplication::UnicodeUTF8));
-        radioButton_5->setText(QApplication::translate("winMainClass", "Hard", 0, QApplication::UnicodeUTF8));
-        radioButton_6->setText(QApplication::translate("winMainClass", "Impossible", 0, QApplication::UnicodeUTF8));
-        groupBox_2->setTitle(QApplication::translate("winMainClass", "Opponent", 0, QApplication::UnicodeUTF8));
-        radioButton->setText(QApplication::translate("winMainClass", "Computer", 0, QApplication::UnicodeUTF8));
-        radioButton_2->setText(QApplication::translate("winMainClass", "Human", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("winMainClass", "X", 0, QApplication::UnicodeUTF8));
+        lblTurn->setText(QApplication::translate("winMainClass", "X", 0, QApplication::UnicodeUTF8));
+        grpDificil->setTitle(QApplication::translate("winMainClass", "Difficulty", 0, QApplication::UnicodeUTF8));
+        radEasy->setText(QApplication::translate("winMainClass", "Easy", 0, QApplication::UnicodeUTF8));
+        radNormal->setText(QApplication::translate("winMainClass", "Normal", 0, QApplication::UnicodeUTF8));
+        radHard->setText(QApplication::translate("winMainClass", "Hard", 0, QApplication::UnicodeUTF8));
+        radDeath->setText(QApplication::translate("winMainClass", "Impossible", 0, QApplication::UnicodeUTF8));
+        grpOpp->setTitle(QApplication::translate("winMainClass", "Opponent", 0, QApplication::UnicodeUTF8));
+        radComputer_3->setText(QApplication::translate("winMainClass", "Computer", 0, QApplication::UnicodeUTF8));
+        radHuman_3->setText(QApplication::translate("winMainClass", "Human", 0, QApplication::UnicodeUTF8));
+        btnNew->setText(QApplication::translate("winMainClass", "New Game", 0, QApplication::UnicodeUTF8));
+        btnExit->setText(QApplication::translate("winMainClass", "Exit Game", 0, QApplication::UnicodeUTF8));
         mnuFile->setTitle(QApplication::translate("winMainClass", "&File", 0, QApplication::UnicodeUTF8));
         mnuHelp->setTitle(QApplication::translate("winMainClass", "&Help", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
