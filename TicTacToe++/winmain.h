@@ -3,6 +3,7 @@
 
 #include <QtGui/QMainWindow>
 #include "ui_winmain.h"
+#include "btnSquare.h"
 
 class winMain : public QMainWindow
 {
