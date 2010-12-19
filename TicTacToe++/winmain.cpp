@@ -16,7 +16,7 @@ winMain::winMain(QWidget *parent, Qt::WFlags flags)
 
 	// Connect the about button in the help menu to the function
 	QAction * about = findChild<QAction*>("mnuAbout");
-	connect(about, SIGNAL(triggered(bool)), qApp, SLOT(aboutGame()));
+	connect(about, SIGNAL(triggered(bool)), this, SLOT(aboutGame()));
 
 
 	// Connect the exit button in the main form to the quit function.
@@ -32,7 +32,7 @@ winMain::winMain(QWidget *parent, Qt::WFlags flags)
 			btn->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
 			// Connect the button to the event
-		//	connect(btn, SIGNAL(clicked()), qApp, SLOT(winMain::btnClicked()));
+			connect(btn, SIGNAL(clicked()), this, SLOT(btnPressed()));
 
 			// Add it to the board
 			grid->addWidget(btn, r, c);
@@ -40,8 +40,12 @@ winMain::winMain(QWidget *parent, Qt::WFlags flags)
 	}
 }
 
+void winMain::btnPressed() {
+	QMessageBox::about(this, "Demo", "Button clicked!");
+}
+
 void winMain::aboutGame() {
-	QMessageBox::about(this, "About this game", "<h1>Tic-Tac-Toe++</h1>");
+	QMessageBox::about(this, "About this game", "<h1>Tic-Tac-Toe++</h1><p>This game was made mostly by Avindra Vishal Goolcharan. It is not licensed for commercial purposes, and is expressly restricted from such activity under <a href=\"http://creativecommons.org/licenses/by-nc-nd/3.0/\">Creative Commons (Attribution-Noncommercial-No Derivative Works) 3.0 Unported</a>.</p><p>For a history of this application and more, see the <a href=\"http://code.google.com/p/ttt-plusplus/\">project's homepage</a> on Google Code.</p>");
 }
 
 winMain::~winMain()

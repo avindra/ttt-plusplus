@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'winmain.h'
 **
-** Created: Sun Dec 19 16:21:13 2010
+** Created: Sun Dec 19 16:29:55 2010
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,18 +23,22 @@ static const uint qt_meta_data_winMain[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       0,    0, // methods
+       2,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
        0,       // signalCount
 
+ // slots: signature, parameters, type, tag, flags
+       9,    8,    8,    8, 0x0a,
+      21,    8,    8,    8, 0x0a,
+
        0        // eod
 };
 
 static const char qt_meta_stringdata_winMain[] = {
-    "winMain\0"
+    "winMain\0\0aboutGame()\0btnPressed()\0"
 };
 
 const QMetaObject winMain::staticMetaObject = {
@@ -64,6 +68,14 @@ int winMain::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     _id = QMainWindow::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: aboutGame(); break;
+        case 1: btnPressed(); break;
+        default: ;
+        }
+        _id -= 2;
+    }
     return _id;
 }
 QT_END_MOC_NAMESPACE
