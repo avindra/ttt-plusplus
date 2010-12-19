@@ -1,6 +1,5 @@
 #include "winmain.h"
 #include <QMessageBox>
-#include "btnSquare.h"
 
 winMain::winMain(QWidget *parent, Qt::WFlags flags)
 	: QMainWindow(parent, flags)
@@ -28,9 +27,6 @@ winMain::winMain(QWidget *parent, Qt::WFlags flags)
 	for(int r = 0; r < 3; ++r) {
 		for(int c = 0; c < 3; ++c) {
 			btnSquare  * btn = new btnSquare();
-
-			// Set button to fill it's allotted space
-			btn->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
 			// Connect the button to the event
 			connect(btn, SIGNAL(clicked()), this, SLOT(btnPressed()));
