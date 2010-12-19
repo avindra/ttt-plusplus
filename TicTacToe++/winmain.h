@@ -7,13 +7,16 @@
 class winMain : public QMainWindow
 {
 	Q_OBJECT
+	public:
 
-public:
-	winMain(QWidget *parent = 0, Qt::WFlags flags = 0);
-	~winMain();
+		void aboutGame();
 
-private:
-	Ui::winMainClass ui;
+		// Construct / destruct
+		winMain(QWidget *parent = 0, Qt::WFlags flags = 0);
+		~winMain();
+
+	private:
+		Ui::winMainClass ui;
 };
 
 #endif // WINMAIN_H
