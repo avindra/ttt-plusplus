@@ -15,6 +15,8 @@ class winMain : public QMainWindow
 		Board * gameBoard;
 		bool xHasTurn;
 
+		QLabel * whoseTurn;
+
 		// Construct / destruct
 		winMain(QWidget *parent = 0, Qt::WFlags flags = 0);
 		~winMain();

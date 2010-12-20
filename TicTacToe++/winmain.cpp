@@ -7,6 +7,9 @@ winMain::winMain(QWidget *parent, Qt::WFlags flags)
 	xHasTurn = true;
 	ui.setupUi(this);
 
+	// Find the whose Turn label
+	whoseTurn = findChild<QLabel *>("lblTurn");
+
 	// Find the main "grdGame" as "grid"
 	QGridLayout * grid = findChild<QGridLayout *>("grdGame");
 
@@ -19,6 +22,9 @@ winMain::winMain(QWidget *parent, Qt::WFlags flags)
 	QAction * about = findChild<QAction*>("mnuAbout");
 	connect(about, SIGNAL(triggered(bool)), this, SLOT(aboutGame()));
 
+	// Connect the new button in the file menu to the function
+	QAction * mnunew = findChild<QAction*>("mnuNewGame");
+	connect(mnunew, SIGNAL(triggered(bool)), this, SLOT(newGame()));
 
 	// Connect the exit button in the main form to the quit function.
 	QPushButton * exit = findChild<QPushButton*>("btnExit");
@@ -42,11 +48,11 @@ winMain::winMain(QWidget *parent, Qt::WFlags flags)
 			grid->addWidget(btn, r, c);
 		}
 	}
+	gameBoard = new Board(chainIn);
 #ifdef DEBUG
 	// We're just checking to verify if the
 	// board's orientations were properly set up here.
 	QString out = "Orient:\t";
-	gameBoard = new Board(chainIn);
 	for(int r = 0; r < 8; ++r) {
 		for(int c = 0; c < 8; ++c) {
 			out += QString::number(gameBoard->orients[r][c]) + " ";
@@ -59,15 +65,20 @@ winMain::winMain(QWidget *parent, Qt::WFlags flags)
 
 void winMain::newGame() {
 	gameBoard->reset();
+	whoseTurn->setText("X");
+	xHasTurn = true;
 }
 
 void winMain::btnPressed() {
-	xHasTurn = !xHasTurn;
 	btnSquare* btnPressed = (btnSquare * ) sender();
-	if(xHasTurn)
+	if(xHasTurn) {
 		btnPressed->setX();
-	else
+		whoseTurn->setText("O");
+	} else {
 		btnPressed->setO();
+		whoseTurn->setText("X");
+	}
+	xHasTurn = !xHasTurn;
 }
 
 void winMain::aboutGame() {
