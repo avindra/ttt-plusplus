@@ -57,8 +57,17 @@ Board::Board(btnSquare * ins) {
 */
 }
 
+bool Board::get(int index) {
+	//return btns[orients[orientation][index]];
+	return true;
+}
+
 bool Board::rotate() {
 	++orientation;
+	if(orientation == 8) {
+		orientation = 0;
+		return false;
+	}
 	return true;
 }
 

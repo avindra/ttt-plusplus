@@ -242,6 +242,9 @@ font-size:24px;</string>
    <property name="text">
     <string>&amp;New Game</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
   </action>
   <action name="mnuExit">
    <property name="text">

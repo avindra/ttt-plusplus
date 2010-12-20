@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'winmain.ui'
 **
-** Created: Mon Dec 20 13:48:49 2010
+** Created: Mon Dec 20 14:51:33 2010
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -189,6 +189,7 @@ public:
     {
         winMainClass->setWindowTitle(QApplication::translate("winMainClass", "Tic-Tac-Toe++ Alpha", 0, QApplication::UnicodeUTF8));
         mnuNewGame->setText(QApplication::translate("winMainClass", "&New Game", 0, QApplication::UnicodeUTF8));
+        mnuNewGame->setShortcut(QApplication::translate("winMainClass", "Ctrl+N", 0, QApplication::UnicodeUTF8));
         mnuExit->setText(QApplication::translate("winMainClass", "E&xit", 0, QApplication::UnicodeUTF8));
         mnuAbout->setText(QApplication::translate("winMainClass", "&About", 0, QApplication::UnicodeUTF8));
         lblTurn->setText(QApplication::translate("winMainClass", "X", 0, QApplication::UnicodeUTF8));

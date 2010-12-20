@@ -13,22 +13,22 @@ btnSquare::~btnSquare() {
 }
 
 void btnSquare::setX() {
-	if(this->isFlat()) return;
+	if(!this->isEnabled()) return;
 	blnIsX = true;
 	this->setText("X");
-	this->setFlat(true);
+	this->setEnabled(false);
 }
 
 void btnSquare::setO() {
-	if(this->isFlat()) return;
+	if(!this->isEnabled()) return;
 	blnIsX = false;
 	this->setText("O");
-	this->setFlat(true);
+	this->setEnabled(false);
 }
 
 void btnSquare::unset() {
 	this->setText("");
-	this->setFlat(false);
+	this->setEnabled(true);
 }
 
 bool btnSquare::isX() {
