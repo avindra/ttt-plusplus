@@ -28,6 +28,6 @@ class btnSquare : public QPushButton
 		// Returns whether or not the square has an O.
 		bool isO();
 
-		// Whether or not this square has an X.
-		bool blnIsX;
+		// State of the square. 0 is blank, 1 is X, 2 is O
+		int state;
 };

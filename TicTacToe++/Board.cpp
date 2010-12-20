@@ -4,6 +4,7 @@ Board::Board() {
 }
 
 Board::Board(btnSquare * ins) {
+	orientation = 0;
 	btns = ins;
 	int oSetup[8][9] = {
 		{ // north (standard)
@@ -57,9 +58,8 @@ Board::Board(btnSquare * ins) {
 */
 }
 
-bool Board::get(int index) {
-	//return btns[orients[orientation][index]];
-	return true;
+btnSquare * Board::get(int index) {
+	return &btns[orients[orientation][index]];
 }
 
 bool Board::rotate() {

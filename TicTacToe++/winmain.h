@@ -21,6 +21,9 @@ class winMain : public QMainWindow
 		winMain(QWidget *parent = 0, Qt::WFlags flags = 0);
 		~winMain();
 
+		// Returns whether or not there's a winner.
+		bool winner();
+
 	public slots:
 		// Event handlers
 		void newGame();
