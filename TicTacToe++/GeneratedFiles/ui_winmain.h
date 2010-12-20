@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'winmain.ui'
 **
-** Created: Mon Dec 20 16:37:11 2010
+** Created: Mon Dec 20 17:20:20 2010
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -45,7 +45,7 @@ public:
     QRadioButton *radEasy;
     QRadioButton *radNormal;
     QRadioButton *radHard;
-    QRadioButton *radDeath;
+    QRadioButton *radImp;
     QGroupBox *grpOpp;
     QRadioButton *radComputer;
     QRadioButton *radHuman;
@@ -118,10 +118,10 @@ public:
         radHard = new QRadioButton(grpDificil);
         radHard->setObjectName(QString::fromUtf8("radHard"));
         radHard->setGeometry(QRect(10, 60, 82, 17));
-        radDeath = new QRadioButton(grpDificil);
-        radDeath->setObjectName(QString::fromUtf8("radDeath"));
-        radDeath->setGeometry(QRect(10, 80, 82, 17));
-        radDeath->setStyleSheet(QString::fromUtf8("color:red;font-weight:bold;"));
+        radImp = new QRadioButton(grpDificil);
+        radImp->setObjectName(QString::fromUtf8("radImp"));
+        radImp->setGeometry(QRect(10, 80, 82, 17));
+        radImp->setStyleSheet(QString::fromUtf8("color:red;font-weight:bold;"));
 
         verticalLayout->addWidget(grpDificil);
 
@@ -195,7 +195,7 @@ public:
         radEasy->setText(QApplication::translate("winMainClass", "Easy", 0, QApplication::UnicodeUTF8));
         radNormal->setText(QApplication::translate("winMainClass", "Normal", 0, QApplication::UnicodeUTF8));
         radHard->setText(QApplication::translate("winMainClass", "Hard", 0, QApplication::UnicodeUTF8));
-        radDeath->setText(QApplication::translate("winMainClass", "Impossible", 0, QApplication::UnicodeUTF8));
+        radImp->setText(QApplication::translate("winMainClass", "Impossible", 0, QApplication::UnicodeUTF8));
         grpOpp->setTitle(QApplication::translate("winMainClass", "Opponent", 0, QApplication::UnicodeUTF8));
         radComputer->setText(QApplication::translate("winMainClass", "Computer", 0, QApplication::UnicodeUTF8));
         radHuman->setText(QApplication::translate("winMainClass", "Human", 0, QApplication::UnicodeUTF8));

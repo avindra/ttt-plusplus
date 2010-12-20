@@ -126,7 +126,7 @@ font-size:24px;</string>
           <string>Hard</string>
          </property>
         </widget>
-        <widget class="QRadioButton" name="radDeath">
+        <widget class="QRadioButton" name="radImp">
          <property name="geometry">
           <rect>
            <x>10</x>
