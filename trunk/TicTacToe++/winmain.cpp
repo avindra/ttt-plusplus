@@ -54,7 +54,7 @@ winMain::winMain(QWidget *parent, Qt::WFlags flags)
 	// board's orientations were properly set up here.
 	QString out = "Orient:\t";
 	for(int r = 0; r < 8; ++r) {
-		for(int c = 0; c < 8; ++c) {
+		for(int c = 0; c < 9; ++c) {
 			out += QString::number(gameBoard->orients[r][c]) + " ";
 		}
 		if(r != 7) out += "\nOrient:\t";
