@@ -4,7 +4,8 @@ class Board
 {
 public:
 	int orientation;
-	btnSquare btns[3][3];
+	btnSquare * btns;
 
 	Board();
+	Board(btnSquare * in);
 };
