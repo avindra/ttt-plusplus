@@ -29,13 +29,11 @@ winMain::winMain(QWidget *parent, Qt::WFlags flags)
 	connect(ng, SIGNAL(clicked()), this, SLOT(newGame()));
 
 	// Set up the board
-	btnSquare * chainIn = new btnSquare[9];
+	btnSquare* chainIn = new btnSquare[9];
 	int i = -1;
 	for(int r = 0; r < 3; ++r) {
 		for(int c = 0; c < 3; ++c) {
-			btnSquare * btn = new btnSquare();
-
-			// chainIn[++i] = btn;
+			btnSquare * btn = &chainIn[++i];
 
 			// Connect the button to the event
 			connect(btn, SIGNAL(clicked()), this, SLOT(btnPressed()));
