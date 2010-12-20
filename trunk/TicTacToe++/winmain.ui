@@ -175,9 +175,8 @@ font-size:24px;</string>
           <string>Human</string>
          </property>
         </widget>
-        <zorder>radComputer_3</zorder>
         <zorder>radHuman_3</zorder>
-        <zorder></zorder>
+        <zorder>radComputer_3</zorder>
        </widget>
       </item>
       <item>
@@ -188,14 +187,14 @@ font-size:24px;</string>
         <item>
          <widget class="QPushButton" name="btnNew">
           <property name="text">
-           <string>New Game</string>
+           <string>&amp;New Game</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="btnExit">
           <property name="text">
-           <string>Exit Game</string>
+           <string>E&amp;xit Game</string>
           </property>
          </widget>
         </item>

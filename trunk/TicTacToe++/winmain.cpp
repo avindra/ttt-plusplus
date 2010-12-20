@@ -42,11 +42,23 @@ winMain::winMain(QWidget *parent, Qt::WFlags flags)
 			grid->addWidget(btn, r, c);
 		}
 	}
+#ifdef DEBUG
+	// We're just checking to verify if the
+	// board's orientations were properly set up here.
+	QString out = "Orient:\t";
 	gameBoard = new Board(chainIn);
+	for(int r = 0; r < 8; ++r) {
+		for(int c = 0; c < 8; ++c) {
+			out += QString::number(gameBoard->orients[r][c]) + " ";
+		}
+		if(r != 7) out += "\nOrient:\t";
+	}
+	QMessageBox::about(this, "Board Debug: Orientation setup", out);
+#endif
 }
 
 void winMain::newGame() {
-	QMessageBox::about(this, "New Game", "Unimplemented function.");
+	gameBoard->reset();
 }
 
 void winMain::btnPressed() {
