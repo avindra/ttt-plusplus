@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'winmain.ui'
 **
-** Created: Mon Dec 20 14:51:33 2010
+** Created: Mon Dec 20 16:37:11 2010
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -25,7 +25,6 @@
 #include <QtGui/QPushButton>
 #include <QtGui/QRadioButton>
 #include <QtGui/QStatusBar>
-#include <QtGui/QToolBar>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
 
@@ -48,15 +47,14 @@ public:
     QRadioButton *radHard;
     QRadioButton *radDeath;
     QGroupBox *grpOpp;
-    QRadioButton *radComputer_3;
-    QRadioButton *radHuman_3;
+    QRadioButton *radComputer;
+    QRadioButton *radHuman;
     QVBoxLayout *layBtns;
     QPushButton *btnNew;
     QPushButton *btnExit;
     QMenuBar *mnuMain;
     QMenu *mnuFile;
     QMenu *mnuHelp;
-    QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *winMainClass)
@@ -113,6 +111,7 @@ public:
         radEasy = new QRadioButton(grpDificil);
         radEasy->setObjectName(QString::fromUtf8("radEasy"));
         radEasy->setGeometry(QRect(10, 20, 82, 17));
+        radEasy->setChecked(true);
         radNormal = new QRadioButton(grpDificil);
         radNormal->setObjectName(QString::fromUtf8("radNormal"));
         radNormal->setGeometry(QRect(10, 40, 82, 17));
@@ -122,20 +121,22 @@ public:
         radDeath = new QRadioButton(grpDificil);
         radDeath->setObjectName(QString::fromUtf8("radDeath"));
         radDeath->setGeometry(QRect(10, 80, 82, 17));
+        radDeath->setStyleSheet(QString::fromUtf8("color:red;font-weight:bold;"));
 
         verticalLayout->addWidget(grpDificil);
 
         grpOpp = new QGroupBox(centralWidget);
         grpOpp->setObjectName(QString::fromUtf8("grpOpp"));
         grpOpp->setMinimumSize(QSize(199, 60));
-        radComputer_3 = new QRadioButton(grpOpp);
-        radComputer_3->setObjectName(QString::fromUtf8("radComputer_3"));
-        radComputer_3->setGeometry(QRect(10, 20, 82, 17));
-        radHuman_3 = new QRadioButton(grpOpp);
-        radHuman_3->setObjectName(QString::fromUtf8("radHuman_3"));
-        radHuman_3->setGeometry(QRect(10, 40, 82, 17));
-        radHuman_3->raise();
-        radComputer_3->raise();
+        radComputer = new QRadioButton(grpOpp);
+        radComputer->setObjectName(QString::fromUtf8("radComputer"));
+        radComputer->setGeometry(QRect(10, 20, 82, 17));
+        radComputer->setChecked(true);
+        radHuman = new QRadioButton(grpOpp);
+        radHuman->setObjectName(QString::fromUtf8("radHuman"));
+        radHuman->setGeometry(QRect(10, 40, 82, 17));
+        radHuman->raise();
+        radComputer->raise();
 
         verticalLayout->addWidget(grpOpp);
 
@@ -167,9 +168,6 @@ public:
         mnuHelp = new QMenu(mnuMain);
         mnuHelp->setObjectName(QString::fromUtf8("mnuHelp"));
         winMainClass->setMenuBar(mnuMain);
-        mainToolBar = new QToolBar(winMainClass);
-        mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
-        winMainClass->addToolBar(Qt::TopToolBarArea, mainToolBar);
         statusBar = new QStatusBar(winMainClass);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
         winMainClass->setStatusBar(statusBar);
@@ -199,8 +197,8 @@ public:
         radHard->setText(QApplication::translate("winMainClass", "Hard", 0, QApplication::UnicodeUTF8));
         radDeath->setText(QApplication::translate("winMainClass", "Impossible", 0, QApplication::UnicodeUTF8));
         grpOpp->setTitle(QApplication::translate("winMainClass", "Opponent", 0, QApplication::UnicodeUTF8));
-        radComputer_3->setText(QApplication::translate("winMainClass", "Computer", 0, QApplication::UnicodeUTF8));
-        radHuman_3->setText(QApplication::translate("winMainClass", "Human", 0, QApplication::UnicodeUTF8));
+        radComputer->setText(QApplication::translate("winMainClass", "Computer", 0, QApplication::UnicodeUTF8));
+        radHuman->setText(QApplication::translate("winMainClass", "Human", 0, QApplication::UnicodeUTF8));
         btnNew->setText(QApplication::translate("winMainClass", "&New Game", 0, QApplication::UnicodeUTF8));
         btnExit->setText(QApplication::translate("winMainClass", "E&xit Game", 0, QApplication::UnicodeUTF8));
         mnuFile->setTitle(QApplication::translate("winMainClass", "&File", 0, QApplication::UnicodeUTF8));

@@ -4,7 +4,7 @@
 btnSquare::btnSquare() : QPushButton() {
 	// Set button to fill it's allotted space
 	this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-	this->setStyleSheet("font-size:42px");
+	this->setStyleSheet(style = "font-size:42px;");
 }
 
 // Destruct
@@ -17,6 +17,7 @@ void btnSquare::setX() {
 	state = 1;
 	this->setText("X");
 	this->setEnabled(false);
+	this->setStyleSheet(style + "background-color:red;color:white;");
 }
 
 void btnSquare::setO() {
@@ -24,11 +25,13 @@ void btnSquare::setO() {
 	state = 2;
 	this->setText("O");
 	this->setEnabled(false);
+	this->setStyleSheet(style + "background-color:orange;");
 }
 
 void btnSquare::unset() {
 	this->setText("");
 	this->setEnabled(true);
+	this->setStyleSheet(style);
 	state = 0;
 }
 
