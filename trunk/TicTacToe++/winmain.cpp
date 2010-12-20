@@ -5,7 +5,10 @@ winMain::winMain(QWidget *parent, Qt::WFlags flags)
 	: QMainWindow(parent, flags)
 {
 	xHasTurn = true;
+	computer = true;
 	ui.setupUi(this);
+
+	// get Rads
 
 	// Find the whose Turn label
 	whoseTurn = findChild<QLabel *>("lblTurn");
@@ -131,17 +134,61 @@ bool winMain::winner() {
 	return false;
 }
 
-void winMain::btnPressed() {
-	btnSquare* btnPressed = (btnSquare * ) sender();
+void winMain::pressButton(btnSquare * which) {
 	if(xHasTurn) {
-		btnPressed->setX();
+		which->setX();
 		whoseTurn->setText("O");
 	} else {
-		btnPressed->setO();
+		which->setO();
 		whoseTurn->setText("X");
 	}
-	if (winner()) return;
 	xHasTurn = !xHasTurn;
+}
+
+btnSquare * winMain::computerMove() {
+	int criticalChecks[4][3] = {
+		{0, 1, 2},
+		/*
+			O O ?
+			_ _ _
+			_ _ _
+		*/
+		{0, 2, 1},
+		/*
+			O ? O
+			_ _ _
+			_ _ _
+		*/
+		{0, 4, 8},
+		/*
+			O _ _
+			_ O _
+			_ _ ?
+		*/
+		// I excluded 804 / 084, because later on, the 
+		// center would be picked anyway. Similar coding
+		// strategy is used further down as well.
+		{3, 4, 5}
+		/*
+			_ _ _
+			O O ?
+			_ _ _
+		*/
+	};
+	// randomly play a remaining square
+	// Theoretically, the code will never reach here.
+	btnSquare * compMove = gameBoard->get(qrand() % 8);
+	while (!compMove->isEnabled())
+	{
+		compMove = gameBoard->get(qrand() % 8);
+	}
+	return compMove;
+}
+
+void winMain::btnPressed() {
+	pressButton((btnSquare * ) sender());
+	if (winner()) return;
+	if (computer) pressButton(computerMove());
 }
 
 void winMain::aboutGame() {

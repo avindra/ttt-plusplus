@@ -15,6 +15,12 @@ class winMain : public QMainWindow
 		Board * gameBoard;
 		bool xHasTurn;
 
+		bool computer;
+
+		/*
+		 * Controls we need to find.
+		 */
+		QRadioButton *radEasy, *radNormal, * radHard, * radImp;
 		QLabel * whoseTurn;
 
 		// Construct / destruct
@@ -23,6 +29,10 @@ class winMain : public QMainWindow
 
 		// Returns whether or not there's a winner.
 		bool winner();
+
+		void pressButton(btnSquare * which);
+
+		btnSquare * computerMove();
 
 	public slots:
 		// Event handlers
