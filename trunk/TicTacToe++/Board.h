@@ -38,7 +38,7 @@ public:
 	// Looks incredibly simple and useless, but compared with older
 	// revisions, this helps save tons of code and heavily increases
 	// the performance of this app.
-	bool get(int index);
+	btnSquare * get(int index);
 
 	// Changes the board to the next orientation.
 	// 

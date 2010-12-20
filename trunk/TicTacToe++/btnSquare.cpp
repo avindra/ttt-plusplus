@@ -14,14 +14,14 @@ btnSquare::~btnSquare() {
 
 void btnSquare::setX() {
 	if(!this->isEnabled()) return;
-	blnIsX = true;
+	state = 1;
 	this->setText("X");
 	this->setEnabled(false);
 }
 
 void btnSquare::setO() {
 	if(!this->isEnabled()) return;
-	blnIsX = false;
+	state = 2;
 	this->setText("O");
 	this->setEnabled(false);
 }
@@ -32,9 +32,9 @@ void btnSquare::unset() {
 }
 
 bool btnSquare::isX() {
-	return blnIsX;
+	return state == 1;
 }
 
 bool btnSquare::isO() {
-	return !blnIsX;
+	return state == 2;
 }
