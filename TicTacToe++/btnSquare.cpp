@@ -28,6 +28,7 @@ void btnSquare::setO() {
 
 void btnSquare::unset() {
 	this->setText("");
+	this->setFlat(false);
 }
 
 bool btnSquare::isX() {

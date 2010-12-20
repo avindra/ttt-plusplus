@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'winmain.ui'
 **
-** Created: Mon Dec 20 13:20:50 2010
+** Created: Mon Dec 20 13:48:49 2010
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -134,8 +134,8 @@ public:
         radHuman_3 = new QRadioButton(grpOpp);
         radHuman_3->setObjectName(QString::fromUtf8("radHuman_3"));
         radHuman_3->setGeometry(QRect(10, 40, 82, 17));
-        radComputer_3->raise();
         radHuman_3->raise();
+        radComputer_3->raise();
 
         verticalLayout->addWidget(grpOpp);
 
@@ -200,8 +200,8 @@ public:
         grpOpp->setTitle(QApplication::translate("winMainClass", "Opponent", 0, QApplication::UnicodeUTF8));
         radComputer_3->setText(QApplication::translate("winMainClass", "Computer", 0, QApplication::UnicodeUTF8));
         radHuman_3->setText(QApplication::translate("winMainClass", "Human", 0, QApplication::UnicodeUTF8));
-        btnNew->setText(QApplication::translate("winMainClass", "New Game", 0, QApplication::UnicodeUTF8));
-        btnExit->setText(QApplication::translate("winMainClass", "Exit Game", 0, QApplication::UnicodeUTF8));
+        btnNew->setText(QApplication::translate("winMainClass", "&New Game", 0, QApplication::UnicodeUTF8));
+        btnExit->setText(QApplication::translate("winMainClass", "E&xit Game", 0, QApplication::UnicodeUTF8));
         mnuFile->setTitle(QApplication::translate("winMainClass", "&File", 0, QApplication::UnicodeUTF8));
         mnuHelp->setTitle(QApplication::translate("winMainClass", "&Help", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
