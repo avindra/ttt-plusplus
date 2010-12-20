@@ -96,6 +96,9 @@ font-size:24px;</string>
          <property name="text">
           <string>Easy</string>
          </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
         </widget>
         <widget class="QRadioButton" name="radNormal">
          <property name="geometry">
@@ -132,6 +135,9 @@ font-size:24px;</string>
            <height>17</height>
           </rect>
          </property>
+         <property name="styleSheet">
+          <string notr="true">color:red;font-weight:bold;</string>
+         </property>
          <property name="text">
           <string>Impossible</string>
          </property>
@@ -149,7 +155,7 @@ font-size:24px;</string>
         <property name="title">
          <string>Opponent</string>
         </property>
-        <widget class="QRadioButton" name="radComputer_3">
+        <widget class="QRadioButton" name="radComputer">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -161,8 +167,11 @@ font-size:24px;</string>
          <property name="text">
           <string>Computer</string>
          </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
         </widget>
-        <widget class="QRadioButton" name="radHuman_3">
+        <widget class="QRadioButton" name="radHuman">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -175,8 +184,8 @@ font-size:24px;</string>
           <string>Human</string>
          </property>
         </widget>
-        <zorder>radHuman_3</zorder>
-        <zorder>radComputer_3</zorder>
+        <zorder>radHuman</zorder>
+        <zorder>radComputer</zorder>
        </widget>
       </item>
       <item>
@@ -228,14 +237,6 @@ font-size:24px;</string>
    </widget>
    <addaction name="mnuFile"/>
    <addaction name="mnuHelp"/>
-  </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="mnuNewGame">

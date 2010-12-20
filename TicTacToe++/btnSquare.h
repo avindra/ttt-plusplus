@@ -30,4 +30,6 @@ class btnSquare : public QPushButton
 
 		// State of the square. 0 is blank, 1 is X, 2 is O
 		int state;
+
+		QString style;
 };

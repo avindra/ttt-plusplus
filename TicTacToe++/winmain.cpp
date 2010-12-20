@@ -109,7 +109,11 @@ bool winMain::winner() {
 	}
 	if(winRar != 0)
 	{
-		QMessageBox::about(this, "Winner!", QString(winRar==1 ? "X" : "O") + " wins!!");
+		if(QMessageBox::question(this, "We have a winner!", QString(winRar==1 ? "X" : "O") + " wins!!\n\nPlay again?", QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
+			newGame();
+		else
+			qApp->quit();
+//		QMessageBox::about(this, "Winner!", QString(winRar==1 ? "X" : "O") + " wins!!");
 		return true;
 	}
 	bool draw = true;
@@ -121,6 +125,7 @@ bool winMain::winner() {
 	}
 	if(draw) {
 		QMessageBox::about(this, "It's a draw!", "Nobody wins.");
+		newGame();
 		return true;	
 	}
 	return false;
