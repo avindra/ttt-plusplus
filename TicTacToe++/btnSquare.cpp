@@ -29,6 +29,7 @@ void btnSquare::setO() {
 void btnSquare::unset() {
 	this->setText("");
 	this->setEnabled(true);
+	state = 0;
 }
 
 bool btnSquare::isX() {
