@@ -4,6 +4,7 @@
 winMain::winMain(QWidget *parent, Qt::WFlags flags)
 	: QMainWindow(parent, flags)
 {
+	xHasTurn = true;
 	ui.setupUi(this);
 
 	// Find the main "grdGame" as "grid"
@@ -23,6 +24,10 @@ winMain::winMain(QWidget *parent, Qt::WFlags flags)
 	QPushButton * exit = findChild<QPushButton*>("btnExit");
 	connect(exit, SIGNAL(clicked()), qApp, SLOT(quit()));
 
+	// Connect the new game button to the new game function.
+	QPushButton * ng = findChild<QPushButton*>("btnNew");
+	connect(ng, SIGNAL(clicked()), this, SLOT(newGame()));
+
 	// Set up the board
 	for(int r = 0; r < 3; ++r) {
 		for(int c = 0; c < 3; ++c) {
@@ -37,8 +42,17 @@ winMain::winMain(QWidget *parent, Qt::WFlags flags)
 	}
 }
 
+void winMain::newGame() {
+	QMessageBox::about(this, "New Game", "Unimplemented function.");
+}
+
 void winMain::btnPressed() {
-	QMessageBox::about(this, "Demo", "Button clicked!");
+	xHasTurn = !xHasTurn;
+	btnSquare* btnPressed = (btnSquare * ) sender();
+	if(xHasTurn)
+		btnPressed->setX();
+	else
+		btnPressed->setO();
 }
 
 void winMain::aboutGame() {

@@ -13,12 +13,14 @@ btnSquare::~btnSquare() {
 }
 
 void btnSquare::setX() {
+	if(this->isFlat()) return;
 	blnIsX = true;
 	this->setText("X");
 	this->setFlat(true);
 }
 
 void btnSquare::setO() {
+	if(this->isFlat()) return;
 	blnIsX = false;
 	this->setText("O");
 	this->setFlat(true);

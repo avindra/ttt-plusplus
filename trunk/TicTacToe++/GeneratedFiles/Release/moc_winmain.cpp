@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'winmain.h'
 **
-** Created: Sun Dec 19 18:32:34 2010
+** Created: Mon Dec 20 00:37:00 2010
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_winMain[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       3,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -32,13 +32,15 @@ static const uint qt_meta_data_winMain[] = {
 
  // slots: signature, parameters, type, tag, flags
        9,    8,    8,    8, 0x0a,
-      21,    8,    8,    8, 0x0a,
+      19,    8,    8,    8, 0x0a,
+      31,    8,    8,    8, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_winMain[] = {
-    "winMain\0\0aboutGame()\0btnPressed()\0"
+    "winMain\0\0newGame()\0aboutGame()\0"
+    "btnPressed()\0"
 };
 
 const QMetaObject winMain::staticMetaObject = {
@@ -70,11 +72,12 @@ int winMain::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: aboutGame(); break;
-        case 1: btnPressed(); break;
+        case 0: newGame(); break;
+        case 1: aboutGame(); break;
+        case 2: btnPressed(); break;
         default: ;
         }
-        _id -= 2;
+        _id -= 3;
     }
     return _id;
 }
