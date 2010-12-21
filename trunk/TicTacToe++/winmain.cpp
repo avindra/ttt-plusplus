@@ -314,8 +314,14 @@ btnSquare* winMain::computerMove() {
 		for(int i = 0; i < 2; ++i) {
 			int inner[2];
 			memcpy(inner, opposites[i], sizeof(inner));
-			if (gameBoard->get(inner[0])->isX() && gameBoard->get(inner[1])->isEnabled()) return gameBoard->get(inner[1]);
-			if (gameBoard->get(inner[1])->isX() && gameBoard->get(inner[0])->isEnabled()) return gameBoard->get(inner[0]);
+
+//			QMessageBox::about(this, "Debug", QString::number(inner[0]) + " " + QString::number(inner[1]));
+
+			temp = gameBoard->get(inner[1]);
+			if (gameBoard->get(inner[0])->isX() && temp->isEnabled()) return temp;
+
+			temp = gameBoard->get(inner[0]);
+			if (gameBoard->get(inner[1])->isX() && temp->isEnabled()) return temp;
 		}
 		//empty corner
 		int corners[4] = {
@@ -323,34 +329,34 @@ btnSquare* winMain::computerMove() {
 
 			6,  8
 		};
-		btnSquare * cornPlay = gameBoard->get(corners[qrand() % 3]);
-		while (!cornPlay->isEnabled())
+		temp = gameBoard->get(corners[qrand() % 3]);
+		while (!temp->isEnabled())
 		{
-			cornPlay = gameBoard->get(corners[qrand() % 3]);
+			temp = gameBoard->get(corners[qrand() % 3]);
 		}
-		if (cornPlay->isEnabled()) return cornPlay;
+		if (temp->isEnabled()) return temp;
 		//empty side
 		int sides[4] = {
 			 1, 
 		   3,  5,
 		     7  
 		};
-		btnSquare * sidePlay = gameBoard->get(sides[qrand() % 3]);
-		while (!sidePlay->isEnabled())
+		temp = gameBoard->get(sides[qrand() % 3]);
+		while (!temp->isEnabled())
 		{
-			sidePlay = gameBoard->get(sides[qrand() % 3]);
+			temp = gameBoard->get(sides[qrand() % 3]);
 		}
-		return sidePlay;
+		return temp;
 	}
 
 	// randomly play a remaining square
 	// Theoretically, the code will never reach here.
-	btnSquare * compMove = gameBoard->get(qrand() % 8);
-	while (!compMove->isEnabled())
+	temp = gameBoard->get(qrand() % 8);
+	while (!temp->isEnabled())
 	{
-		compMove = gameBoard->get(qrand() % 8);
+		temp = gameBoard->get(qrand() % 8);
 	}
-	return compMove;
+	return temp;
 }
 
 void winMain::btnPressed() {

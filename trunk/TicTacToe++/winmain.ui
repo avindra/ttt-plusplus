@@ -97,7 +97,7 @@ font-size:24px;</string>
           <string>Easy</string>
          </property>
          <property name="checked">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
         <widget class="QRadioButton" name="radNormal">
@@ -140,6 +140,9 @@ font-size:24px;</string>
          </property>
          <property name="text">
           <string>Impossible</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
          </property>
         </widget>
        </widget>
