@@ -42,3 +42,7 @@ bool btnSquare::isX() {
 bool btnSquare::isO() {
 	return state == 2;
 }
+
+bool btnSquare::autoCheck(bool checkX) {
+	return checkX ? isX() : isO();
+}

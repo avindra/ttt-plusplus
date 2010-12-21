@@ -50,6 +50,8 @@ public:
 	// before returning whether the end was reached or not.
 	bool rotate();
 
+	void reorient();
+
 	// Reset the board to the standard position.
 	void reset();
 };
