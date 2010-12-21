@@ -9,6 +9,10 @@ winMain::winMain(QWidget *parent, Qt::WFlags flags)
 	ui.setupUi(this);
 
 	// get Rads
+	radEasy = findChild<QRadioButton*>("radEasy");
+	radNormal = findChild<QRadioButton*>("radNormal");
+	radHard = findChild<QRadioButton*>("radHard");
+	radImp = findChild<QRadioButton*>("radImp");
 
 	// Find the whose Turn label
 	whoseTurn = findChild<QLabel *>("lblTurn");
@@ -145,7 +149,32 @@ void winMain::pressButton(btnSquare * which) {
 	xHasTurn = !xHasTurn;
 }
 
-btnSquare * winMain::computerMove() {
+
+btnSquare* winMain::checkMoves(int checks[][3], bool isX)
+{
+	do
+	{
+		int len = sizeof(checks) / sizeof(int);
+		btnSquare * temp;
+		for (int i = 0; i < len; ++i)
+		{
+			temp = (gameBoard->get(checks[i][0])->autoCheck(isX)
+				 && gameBoard->get(checks[i][1])->autoCheck(isX)
+				 && gameBoard->get(checks[i][2])->isEnabled())
+
+				 ? gameBoard->get(checks[i][2])
+				 : 0;
+			if (temp != 0)
+			{
+				gameBoard->reorient();
+				return temp;
+			}
+		}
+	} while (gameBoard->rotate());
+	return 0;
+}
+
+btnSquare* winMain::computerMove() {
 	int criticalChecks[4][3] = {
 		{0, 1, 2},
 		/*
@@ -175,6 +204,145 @@ btnSquare * winMain::computerMove() {
 			_ _ _
 		*/
 	};
+	btnSquare * temp;
+
+	//win
+	if (radHard->isChecked() || radImp->isChecked() || (radNormal->isChecked() && (qrand() % 2) >= 1))
+	{
+		if ((temp = checkMoves(criticalChecks, false)) != 0) return temp;
+	}
+	//defend
+	if (radHard->isChecked() || radImp->isChecked() || radNormal->isChecked())
+	{
+		if ((temp = checkMoves(criticalChecks, true)) != 0) return temp;
+	}
+
+	if(radImp->isChecked())
+	{
+		//<-------------------------------------------------------------------------->
+		//								   FORKING
+		//<-------------------------------------------------------------------------->
+		int forks[16][3] = {
+ 			//<--a-->
+			{0, 2, 4},
+			{0, 4, 2},
+			{2, 4, 0},
+			//<--b-->
+			{4, 6, 7},
+			{4, 7, 6},
+			{7, 6, 4},
+			//<--c-->
+			{0, 1, 3},
+			{0, 3, 1},
+			{3, 1, 0},
+			//<--d-->
+			{0, 8, 6},
+			{0, 6, 2},
+			{0, 2, 6},
+			{6, 2, 0},
+			//<--e-->
+			{1, 6, 7},
+			{1, 7, 6},
+			{6, 7, 1}
+		};
+		temp = checkMoves(forks, false);
+		if (temp != 0) return temp;
+		//<-------------------------------------------------------------------------->
+		//							BLOCK FORKING
+		//<-------------------------------------------------------------------------->
+		int bForks[15][3] = {
+			//<--f-->
+			{0, 2, 5},
+			{0, 5, 2},
+			{5, 2, 0},
+ 			//<--a-->
+			{0, 2, 4},
+			{0, 4, 2},
+			{2, 4, 0},
+			//<--b-->
+			{4, 6, 7},
+			{4, 7, 6},
+			{7, 6, 4},
+			//<--c-->
+			{0, 1, 3},
+			{0, 3, 1},
+			{3, 1, 0},
+			//<--e-->
+			{1, 6, 7},
+			{1, 7, 6},
+			{6, 7, 1}
+		};
+		temp = checkMoves(bForks, true);
+		if (temp != 0) return temp;
+		//<--d-->
+		bool defend = false;
+		btnSquare * badbut;
+		do
+		{
+			int tests[3][3] = {
+				{0, 6, 2},
+ 				{0, 2, 6},
+				{6, 2, 0}
+			};
+			for(int i = 0; i < 3; ++i) {
+				int innerTest[3];
+				memcpy(innerTest, tests[i], sizeof(innerTest));
+				if (gameBoard->get(innerTest[0])->isX() && gameBoard->get(innerTest[1])->isX() && (gameBoard->get(innerTest[2])->isEnabled() || gameBoard->get(8)->isEnabled()))
+				{
+					defend = true;
+					badbut = gameBoard->get(innerTest[2]);
+				}
+			}
+			if (defend)
+			{
+				btnSquare * theMove = gameBoard->get(0);
+				while (!theMove->isEnabled() || theMove == badbut || theMove == gameBoard->get(8))
+				{
+					theMove = gameBoard->get((qrand() % 7) + 1);
+				}
+				return theMove;
+			}
+		} while (gameBoard->rotate());
+		//center
+		if (gameBoard->get(4)->isEnabled())
+			return gameBoard->get(4);
+		//opposite corner
+		int opposites[2][2] = {
+			{0, 8},
+			{3, 7}
+		};
+		for(int i = 0; i < 2; ++i) {
+			int inner[2];
+			memcpy(inner, opposites[i], sizeof(inner));
+			if (gameBoard->get(inner[0])->isX() && gameBoard->get(inner[1])->isEnabled()) return gameBoard->get(inner[1]);
+			if (gameBoard->get(inner[1])->isX() && gameBoard->get(inner[0])->isEnabled()) return gameBoard->get(inner[0]);
+		}
+		//empty corner
+		int corners[4] = {
+			0,  2,
+
+			6,  8
+		};
+		btnSquare * cornPlay = gameBoard->get(corners[qrand() % 3]);
+		while (!cornPlay->isEnabled())
+		{
+			cornPlay = gameBoard->get(corners[qrand() % 3]);
+		}
+		if (cornPlay->isEnabled()) return cornPlay;
+		//empty side
+		int sides[4] = {
+			 1, 
+		   3,  5,
+		     7  
+		};
+		btnSquare * sidePlay = gameBoard->get(sides[qrand() % 3]);
+		while (!sidePlay->isEnabled())
+		{
+			sidePlay = gameBoard->get(sides[qrand() % 3]);
+		}
+		return sidePlay;
+	}
+
 	// randomly play a remaining square
 	// Theoretically, the code will never reach here.
 	btnSquare * compMove = gameBoard->get(qrand() % 8);
@@ -188,7 +356,10 @@ btnSquare * winMain::computerMove() {
 void winMain::btnPressed() {
 	pressButton((btnSquare * ) sender());
 	if (winner()) return;
-	if (computer) pressButton(computerMove());
+	if (computer) {
+		pressButton(computerMove());
+		if(winner()) return;
+	}
 }
 
 void winMain::aboutGame() {

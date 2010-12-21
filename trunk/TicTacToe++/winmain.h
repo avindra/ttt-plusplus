@@ -30,8 +30,18 @@ class winMain : public QMainWindow
 		// Returns whether or not there's a winner.
 		bool winner();
 
+
 		void pressButton(btnSquare * which);
 
+		/// <summary>
+		/// This function heavily improves program flow by 
+		/// checking the moves from a single function, instead
+		/// of just repeating a lot of code.
+		/// </summary>
+		/// <param name="checks">The array of checks.</param>
+		/// <param name="isX">Tell the function whether to verify against X (true) or O (false).</param>
+		/// <returns></returns>
+		btnSquare * checkMoves(int check[4][3], bool checkX);
 		btnSquare * computerMove();
 
 	public slots:

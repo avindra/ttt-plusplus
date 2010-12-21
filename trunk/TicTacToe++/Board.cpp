@@ -64,10 +64,14 @@ btnSquare * Board::get(int index) {
 
 bool Board::rotate() {
 	if(++orientation == 8) {
-		orientation = 0;
+		reorient();
 		return false;
 	}
 	return true;
+}
+
+void Board::reorient() {
+	orientation = 0;
 }
 
 void Board::reset() {
