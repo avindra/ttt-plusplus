@@ -75,5 +75,5 @@ void Board::reorient() {
 }
 
 void Board::reset() {
-	for(int i = 0; i < 9; ++i) btns[i].unset();
+	for(int i = 8; i >= 0; --i) btns[i].unset();
 }
