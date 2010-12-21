@@ -44,8 +44,8 @@ winMain::winMain(QWidget *parent, Qt::WFlags flags)
 	// Set up the board
 	btnSquare* chainIn = new btnSquare[9];
 	int i = -1;
-	for(int r = 0; r < 3; ++r) {
-		for(int c = 0; c < 3; ++c) {
+	for(int r = 2; r >= 0; --r) {
+		for(int c = 2; c >= 0; --c) {
 			btnSquare * btn = &chainIn[++i];
 
 			// Connect the button to the event
@@ -92,9 +92,9 @@ bool winMain::winner() {
 		{2, 4, 6}
 	};
 	int winRar = 0;
-	for(int j = 0; j < 8; ++j) {
+	for(int j = 7; j >= 0; --j) {
 		int xCount = 0, oCount = 0;
-		for(int i = 0; i < 3; ++i) {
+		for(int i = 2; i >=0; --i) {
 			btnSquare * temp = gameBoard->get(winPaths[j][i]);
 			if(temp->isX())
 			{
@@ -124,7 +124,7 @@ bool winMain::winner() {
 		return true;
 	}
 	bool draw = true;
-	for(int i = 0; i < 9; ++i) {
+	for(int i = 8; i >= 0; --i) {
 		if(gameBoard->get(i)->isEnabled()) {
 			draw = false;
 			break;
@@ -281,7 +281,7 @@ btnSquare* winMain::computerMove() {
  				{0, 2, 6},
 				{6, 2, 0}
 			};
-			for(int i = 0; i < 3; ++i) {
+			for(int i = 2; i >= 0; --i) {
 				int innerTest[3];
 				memcpy(innerTest, tests[i], sizeof(innerTest));
 				if (gameBoard->get(innerTest[0])->isX() && gameBoard->get(innerTest[1])->isX() && (gameBoard->get(innerTest[2])->isEnabled() || gameBoard->get(8)->isEnabled()))
@@ -308,7 +308,7 @@ btnSquare* winMain::computerMove() {
 			{0, 8},
 			{3, 7}
 		};
-		for(int i = 0; i < 2; ++i) {
+		for(int i = 1; i >= 0; --i) {
 			int inner[2];
 			memcpy(inner, opposites[i], sizeof(inner));
 
