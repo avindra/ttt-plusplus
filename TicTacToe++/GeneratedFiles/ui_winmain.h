@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'winmain.ui'
 **
-** Created: Mon Dec 20 17:20:20 2010
+** Created: Tue Dec 21 13:53:38 2010
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -111,7 +111,7 @@ public:
         radEasy = new QRadioButton(grpDificil);
         radEasy->setObjectName(QString::fromUtf8("radEasy"));
         radEasy->setGeometry(QRect(10, 20, 82, 17));
-        radEasy->setChecked(true);
+        radEasy->setChecked(false);
         radNormal = new QRadioButton(grpDificil);
         radNormal->setObjectName(QString::fromUtf8("radNormal"));
         radNormal->setGeometry(QRect(10, 40, 82, 17));
@@ -122,6 +122,7 @@ public:
         radImp->setObjectName(QString::fromUtf8("radImp"));
         radImp->setGeometry(QRect(10, 80, 82, 17));
         radImp->setStyleSheet(QString::fromUtf8("color:red;font-weight:bold;"));
+        radImp->setChecked(true);
 
         verticalLayout->addWidget(grpDificil);
 
