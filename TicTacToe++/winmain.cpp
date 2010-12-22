@@ -5,7 +5,6 @@ winMain::winMain(QWidget *parent, Qt::WFlags flags)
 	: QMainWindow(parent, flags)
 {
 	xHasTurn = true;
-	computer = true;
 	ui.setupUi(this);
 
 	// get Rads
@@ -13,6 +12,7 @@ winMain::winMain(QWidget *parent, Qt::WFlags flags)
 	radNormal = findChild<QRadioButton*>("radNormal");
 	radHard = findChild<QRadioButton*>("radHard");
 	radImp = findChild<QRadioButton*>("radImp");
+	radComputer = findChild<QRadioButton*>("radComputer");
 
 	// Find the whose Turn label
 	whoseTurn = findChild<QLabel *>("lblTurn");
@@ -359,7 +359,7 @@ btnSquare* winMain::computerMove() {
 void winMain::btnPressed() {
 	pressButton((btnSquare * ) sender());
 	if (winner()) return;
-	if (computer) {
+	if (radComputer->isChecked()) {
 		pressButton(computerMove());
 		if(winner()) return;
 	}
