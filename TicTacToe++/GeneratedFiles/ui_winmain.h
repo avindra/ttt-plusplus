@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'winmain.ui'
 **
-** Created: Tue Dec 21 13:53:38 2010
+** Created: Tue Dec 21 21:30:25 2010
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -36,6 +36,7 @@ public:
     QAction *mnuNewGame;
     QAction *mnuExit;
     QAction *mnuAbout;
+    QAction *mnuAboutQt;
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout_3;
     QGridLayout *grdGame;
@@ -77,6 +78,8 @@ public:
         mnuExit->setObjectName(QString::fromUtf8("mnuExit"));
         mnuAbout = new QAction(winMainClass);
         mnuAbout->setObjectName(QString::fromUtf8("mnuAbout"));
+        mnuAboutQt = new QAction(winMainClass);
+        mnuAboutQt->setObjectName(QString::fromUtf8("mnuAboutQt"));
         centralWidget = new QWidget(winMainClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         horizontalLayout_3 = new QHBoxLayout(centralWidget);
@@ -178,6 +181,8 @@ public:
         mnuFile->addAction(mnuNewGame);
         mnuFile->addAction(mnuExit);
         mnuHelp->addAction(mnuAbout);
+        mnuHelp->addSeparator();
+        mnuHelp->addAction(mnuAboutQt);
 
         retranslateUi(winMainClass);
 
@@ -191,6 +196,7 @@ public:
         mnuNewGame->setShortcut(QApplication::translate("winMainClass", "Ctrl+N", 0, QApplication::UnicodeUTF8));
         mnuExit->setText(QApplication::translate("winMainClass", "E&xit", 0, QApplication::UnicodeUTF8));
         mnuAbout->setText(QApplication::translate("winMainClass", "&About", 0, QApplication::UnicodeUTF8));
+        mnuAboutQt->setText(QApplication::translate("winMainClass", "About &Qt", 0, QApplication::UnicodeUTF8));
         lblTurn->setText(QApplication::translate("winMainClass", "X", 0, QApplication::UnicodeUTF8));
         grpDificil->setTitle(QApplication::translate("winMainClass", "Difficulty", 0, QApplication::UnicodeUTF8));
         radEasy->setText(QApplication::translate("winMainClass", "Easy", 0, QApplication::UnicodeUTF8));

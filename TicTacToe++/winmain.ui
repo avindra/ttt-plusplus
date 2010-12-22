@@ -237,6 +237,8 @@ font-size:24px;</string>
      <string>&amp;Help</string>
     </property>
     <addaction name="mnuAbout"/>
+    <addaction name="separator"/>
+    <addaction name="mnuAboutQt"/>
    </widget>
    <addaction name="mnuFile"/>
    <addaction name="mnuHelp"/>
@@ -258,6 +260,11 @@ font-size:24px;</string>
   <action name="mnuAbout">
    <property name="text">
     <string>&amp;About</string>
+   </property>
+  </action>
+  <action name="mnuAboutQt">
+   <property name="text">
+    <string>About &amp;Qt</string>
    </property>
   </action>
  </widget>

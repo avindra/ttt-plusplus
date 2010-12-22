@@ -29,6 +29,9 @@ winMain::winMain(QWidget *parent, Qt::WFlags flags)
 	QAction * about = findChild<QAction*>("mnuAbout");
 	connect(about, SIGNAL(triggered(bool)), this, SLOT(aboutGame()));
 
+	QAction * abqt = findChild<QAction*>("mnuAboutQt");
+	connect(abqt, SIGNAL(triggered(bool)), this, SLOT(aboutQt()));
+
 	// Connect the new button in the file menu to the function
 	QAction * mnunew = findChild<QAction*>("mnuNewGame");
 	connect(mnunew, SIGNAL(triggered(bool)), this, SLOT(newGame()));
@@ -66,7 +69,7 @@ winMain::winMain(QWidget *parent, Qt::WFlags flags)
 		}
 		if(r != 7) out += "\nOrient:\t";
 	}
-	QMessageBox::about(this, "Board Debug: Orientation setup", out);
+	QMessageBox::information(this, "Board Debug: Orientation setup", out);
 #endif
 }
 
@@ -120,7 +123,6 @@ bool winMain::winner() {
 			newGame();
 		else
 			qApp->quit();
-//		QMessageBox::about(this, "Winner!", QString(winRar==1 ? "X" : "O") + " wins!!");
 		return true;
 	}
 	bool draw = true;
@@ -131,7 +133,7 @@ bool winMain::winner() {
 		}
 	}
 	if(draw) {
-		QMessageBox::about(this, "It's a draw!", "Nobody wins.");
+		QMessageBox::information(this, "It's a draw!", "Nobody wins.");
 		newGame();
 		return true;	
 	}
@@ -312,14 +314,19 @@ btnSquare* winMain::computerMove() {
 			int inner[2];
 			memcpy(inner, opposites[i], sizeof(inner));
 
-//			QMessageBox::about(this, "Debug", QString::number(inner[0]) + " " + QString::number(inner[1]));
-
 			temp = gameBoard->get(inner[1]);
 			if (gameBoard->get(inner[0])->isX() && temp->isEnabled()) return temp;
 
 			temp = gameBoard->get(inner[0]);
 			if (gameBoard->get(inner[1])->isX() && temp->isEnabled()) return temp;
 		}
+
+		// TODO: If corners, and similarly sides, are all taken up, then
+		// the code will result in an infinite loop.
+		// 
+		// This has never happened, which means the code below isn't even
+		// being reached.
+
 		//empty corner
 		int corners[4] = {
 			0,  2,
@@ -366,7 +373,11 @@ void winMain::btnPressed() {
 }
 
 void winMain::aboutGame() {
-	QMessageBox::about(this, "About this game", "<h1>Tic-Tac-Toe++</h1><p>This game was made mostly by Avindra Vishal Goolcharan. It is not licensed for commercial purposes, and is expressly restricted from such activity under <a href=\"http://creativecommons.org/licenses/by-nc-nd/3.0/\">Creative Commons (Attribution-Noncommercial-No Derivative Works) 3.0 Unported</a>.</p><p>For a history of this application and more, see the <a href=\"http://code.google.com/p/ttt-plusplus/\">project's homepage</a> on Google Code.</p>");
+	QMessageBox::about(this, "About this game", "<h1>Tic-Tac-Toe++</h1><p>This game was made mostly by Avindra Vishal Goolcharan. It is not licensed for commercial purposes, and is expressly restricted from such activity under <a href=\"http://creativecommons.org/licenses/by-nc-nd/3.0/\">Creative Commons <small>(Attribution-Noncommercial-No Derivative Works)</small> 3.0 Unported</a>.</p><p>For a history of this application and more, see the <a href=\"http://code.google.com/p/ttt-plusplus/\">project's homepage</a> on Google Code.</p>");
+}
+
+void winMain::aboutQt() {
+	QMessageBox::aboutQt(this);
 }
 
 winMain::~winMain()
