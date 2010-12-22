@@ -15,12 +15,10 @@ class winMain : public QMainWindow
 		Board * gameBoard;
 		bool xHasTurn;
 
-		bool computer;
-
 		/*
 		 * Controls we need to find.
 		 */
-		QRadioButton *radEasy, *radNormal, * radHard, * radImp;
+		QRadioButton *radEasy, *radNormal, * radHard, * radImp, * radComputer;
 		QLabel * whoseTurn;
 
 		// Construct / destruct
