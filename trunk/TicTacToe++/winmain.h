@@ -46,6 +46,7 @@ class winMain : public QMainWindow
 		// Event handlers
 		void newGame();
 		void aboutGame();
+		void aboutQt();
 		void btnPressed();
 
 	private:
