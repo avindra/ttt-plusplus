@@ -26,7 +26,7 @@ class winMain : public QMainWindow
 		~winMain();
 
 		// Returns whether or not there's a winner.
-		bool winner();
+		bool winner(bool isComp);
 
 
 		void pressButton(btnSquare * which);

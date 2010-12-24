@@ -79,7 +79,7 @@ void winMain::newGame() {
 	xHasTurn = true;
 }
 
-bool winMain::winner() {
+bool winMain::winner(bool isComp) {
 	int winPaths[8][3] = {
 		{0, 1, 2},
 		{3, 4, 5},
@@ -119,7 +119,7 @@ bool winMain::winner() {
 	}
 	if(winRar != 0)
 	{
-		if(QMessageBox::question(this, "We have a winner!", QString(winRar==1 ? "X" : "O") + " wins!!\n\nPlay again?", QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
+		if(QMessageBox::question(this, "We have a winner!", (isComp ? "The computer (" : "") + QString(winRar==1 ? "X" : "O") + (isComp ? ")" : "") + " wins!!\n\nPlay again?", QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
 			newGame();
 		else
 			qApp->quit();
@@ -365,10 +365,10 @@ btnSquare* winMain::computerMove() {
 
 void winMain::btnPressed() {
 	pressButton((btnSquare * ) sender());
-	if (winner()) return;
+	if (winner(false)) return;
 	if (radComputer->isChecked()) {
 		pressButton(computerMove());
-		if(winner()) return;
+		if(winner(true)) return;
 	}
 }
 
@@ -382,5 +382,4 @@ void winMain::aboutQt() {
 
 winMain::~winMain()
 {
-
 }
