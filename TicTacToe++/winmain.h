@@ -42,6 +42,9 @@ class winMain : public QMainWindow
 		btnSquare * checkMoves(int check[4][3], bool checkX);
 		btnSquare * computerMove();
 
+
+		virtual void keyPressEvent(QKeyEvent * e);
+
 	public slots:
 		// Event handlers
 		void newGame();
