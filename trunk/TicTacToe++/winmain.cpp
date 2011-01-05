@@ -1,5 +1,6 @@
 #include "winmain.h"
 #include <QMessageBox>
+#include <QKeyEvent>
 
 winMain::winMain(QWidget *parent, Qt::WFlags flags)
 	: QMainWindow(parent, flags)
@@ -370,6 +371,33 @@ void winMain::btnPressed() {
 		pressButton(computerMove());
 		if(winner(true)) return;
 	}
+}
+
+void winMain::keyPressEvent(QKeyEvent * e) {
+	int which = -1;
+	switch(e->key()) {
+		case Qt::Key_1 :
+			which = 2; break;
+		case Qt::Key_2 :
+			which = 1; break;
+		case Qt::Key_3 :
+			which = 0; break;
+
+		case Qt::Key_4 :
+			which = 5; break;
+		case Qt::Key_5 :
+			which = 4; break;
+		case Qt::Key_6 :
+			which = 3; break;
+
+		case Qt::Key_7 :
+			which = 8; break;
+		case Qt::Key_8 :
+			which = 7; break;
+		case Qt::Key_9 :
+			which = 6; break;
+	}
+	if(which!=-1) gameBoard->get(which)->click();
 }
 
 void winMain::aboutGame() {
