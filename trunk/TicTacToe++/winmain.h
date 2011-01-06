@@ -19,7 +19,7 @@ class winMain : public QMainWindow
 		 * Controls we need to find.
 		 */
 		QRadioButton *radEasy, *radNormal, * radHard, * radImp, * radComputer;
-		QLabel * whoseTurn;
+		QLabel * whoseTurn, * taunt;
 
 		// Construct / destruct
 		winMain(QWidget *parent = 0, Qt::WFlags flags = 0);
