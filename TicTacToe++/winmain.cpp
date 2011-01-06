@@ -15,8 +15,9 @@ winMain::winMain(QWidget *parent, Qt::WFlags flags)
 	radImp = findChild<QRadioButton*>("radImp");
 	radComputer = findChild<QRadioButton*>("radComputer");
 
-	// Find the whose Turn label
+	// Find labels
 	whoseTurn = findChild<QLabel *>("lblTurn");
+	taunt = findChild<QLabel *>("lblTaunt");
 
 	// Find the main "grdGame" as "grid"
 	QGridLayout * grid = findChild<QGridLayout *>("grdGame");
@@ -77,6 +78,7 @@ winMain::winMain(QWidget *parent, Qt::WFlags flags)
 void winMain::newGame() {
 	gameBoard->reset();
 	whoseTurn->setText("X");
+	taunt->setText("");
 	xHasTurn = true;
 }
 
@@ -157,19 +159,20 @@ btnSquare* winMain::checkMoves(int checks[][3], bool isX, int len)
 {
 	do
 	{
-		btnSquare * temp;
+		btnSquare * _temp;
 		for (int i = len; i >= 0; --i)
 		{
-			temp = (gameBoard->get(checks[i][0])->autoCheck(isX)
+			_temp = (gameBoard->get(checks[i][0])->autoCheck(isX)
 				 && gameBoard->get(checks[i][1])->autoCheck(isX)
 				 && gameBoard->get(checks[i][2])->isEnabled())
 
 				 ? gameBoard->get(checks[i][2])
 				 : 0;
-			if (temp)
+			if (_temp)
 			{
+				taunt->setText("Move calculated! " + QString::number(checks[i][0]) + " | " + QString::number(checks[i][1]) + " | " + QString::number(checks[i][2]));
 				gameBoard->reorient();
-				return temp;
+				return _temp;
 			}
 		}
 	} while (gameBoard->rotate());
@@ -211,12 +214,18 @@ btnSquare* winMain::computerMove() {
 	//win
 	if (radHard->isChecked() || radImp->isChecked() || (radNormal->isChecked() && (qrand() % 2) >= 1))
 	{
-		if (temp = checkMoves(criticalChecks, false, 3)) return temp;
+		if (temp = checkMoves(criticalChecks, false, 3)) {
+			taunt->setText("I see an opportunity! You lose! Fear my awesome power!");
+			return temp;
+		}
 	}
 	//defend
 	if (radHard->isChecked() || radImp->isChecked() || radNormal->isChecked())
 	{
-		if (temp = checkMoves(criticalChecks, true, 3)) return temp;
+		if (temp = checkMoves(criticalChecks, true, 3)) {
+			taunt->setText("I block your dumb ass!");
+			return temp;
+		}
 	}
 
 	if(radImp->isChecked())
@@ -247,11 +256,18 @@ btnSquare* winMain::computerMove() {
 			{1, 7, 6},
 			{6, 7, 1}
 		};
-		if (temp = checkMoves(forks, false, 15)) return temp;
+		if (temp = checkMoves(forks, false, 15)) {
+			taunt->setText("Muahahaha! Checkmate, bitch!");
+			return temp;
+		}
 		//<-------------------------------------------------------------------------->
 		//							BLOCK FORKING
 		//<-------------------------------------------------------------------------->
 		int bForks[15][3] = {
+			//<--e-->
+			{1, 6, 7},
+			{1, 7, 6},
+			{6, 7, 1},
 			//<--f-->
 			{0, 2, 5},
 			{0, 5, 2},
@@ -267,13 +283,12 @@ btnSquare* winMain::computerMove() {
 			//<--c-->
 			{0, 1, 3},
 			{0, 3, 1},
-			{3, 1, 0},
-			//<--e-->
-			{1, 6, 7},
-			{1, 7, 6},
-			{6, 7, 1}
+			{3, 1, 0}
 		};
-		if (temp = checkMoves(bForks, true, 14)) return temp;
+		if (temp = checkMoves(bForks, true, 14)) {
+			taunt->setText("I see what you did there... Blocked your fork, loser!");
+			return temp;
+		}
 		//<--d-->
 		bool defend = false;
 		btnSquare * badbut;

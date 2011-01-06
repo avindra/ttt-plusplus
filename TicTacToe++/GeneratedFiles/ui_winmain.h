@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'winmain.ui'
 **
-** Created: Tue Dec 21 21:30:25 2010
+** Created: Thu Jan 6 01:36:12 2011
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -50,6 +50,7 @@ public:
     QGroupBox *grpOpp;
     QRadioButton *radComputer;
     QRadioButton *radHuman;
+    QLabel *lblTaunt;
     QVBoxLayout *layBtns;
     QPushButton *btnNew;
     QPushButton *btnExit;
@@ -63,7 +64,7 @@ public:
         if (winMainClass->objectName().isEmpty())
             winMainClass->setObjectName(QString::fromUtf8("winMainClass"));
         winMainClass->setWindowModality(Qt::NonModal);
-        winMainClass->resize(615, 572);
+        winMainClass->resize(598, 570);
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -94,8 +95,9 @@ public:
         horizontalLayout_3->addLayout(grdGame);
 
         verticalLayout = new QVBoxLayout();
-        verticalLayout->setSpacing(6);
+        verticalLayout->setSpacing(0);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
         lblTurn = new QLabel(centralWidget);
         lblTurn->setObjectName(QString::fromUtf8("lblTurn"));
         lblTurn->setMinimumSize(QSize(0, 31));
@@ -144,11 +146,19 @@ public:
 
         verticalLayout->addWidget(grpOpp);
 
+        lblTaunt = new QLabel(centralWidget);
+        lblTaunt->setObjectName(QString::fromUtf8("lblTaunt"));
+        lblTaunt->setMaximumSize(QSize(285, 16777215));
+
+        verticalLayout->addWidget(lblTaunt);
+
         layBtns = new QVBoxLayout();
         layBtns->setSpacing(0);
         layBtns->setObjectName(QString::fromUtf8("layBtns"));
         btnNew = new QPushButton(centralWidget);
         btnNew->setObjectName(QString::fromUtf8("btnNew"));
+        btnNew->setMinimumSize(QSize(200, 0));
+        btnNew->setMaximumSize(QSize(16777215, 16777215));
 
         layBtns->addWidget(btnNew);
 
@@ -166,7 +176,7 @@ public:
         winMainClass->setCentralWidget(centralWidget);
         mnuMain = new QMenuBar(winMainClass);
         mnuMain->setObjectName(QString::fromUtf8("mnuMain"));
-        mnuMain->setGeometry(QRect(0, 0, 615, 21));
+        mnuMain->setGeometry(QRect(0, 0, 598, 21));
         mnuFile = new QMenu(mnuMain);
         mnuFile->setObjectName(QString::fromUtf8("mnuFile"));
         mnuHelp = new QMenu(mnuMain);
@@ -206,6 +216,7 @@ public:
         grpOpp->setTitle(QApplication::translate("winMainClass", "Opponent", 0, QApplication::UnicodeUTF8));
         radComputer->setText(QApplication::translate("winMainClass", "Computer", 0, QApplication::UnicodeUTF8));
         radHuman->setText(QApplication::translate("winMainClass", "Human", 0, QApplication::UnicodeUTF8));
+        lblTaunt->setText(QString());
         btnNew->setText(QApplication::translate("winMainClass", "&New Game", 0, QApplication::UnicodeUTF8));
         btnExit->setText(QApplication::translate("winMainClass", "E&xit Game", 0, QApplication::UnicodeUTF8));
         mnuFile->setTitle(QApplication::translate("winMainClass", "&File", 0, QApplication::UnicodeUTF8));

@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>615</width>
-    <height>572</height>
+    <width>598</width>
+    <height>570</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -45,6 +45,12 @@
     </item>
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="sizeConstraint">
+       <enum>QLayout::SetDefaultConstraint</enum>
+      </property>
       <item>
        <widget class="QLabel" name="lblTurn">
         <property name="minimumSize">
@@ -192,12 +198,37 @@ font-size:24px;</string>
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="lblTaunt">
+        <property name="maximumSize">
+         <size>
+          <width>285</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
        <layout class="QVBoxLayout" name="layBtns">
         <property name="spacing">
          <number>0</number>
         </property>
         <item>
          <widget class="QPushButton" name="btnNew">
+          <property name="minimumSize">
+           <size>
+            <width>200</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
           <property name="text">
            <string>&amp;New Game</string>
           </property>
@@ -221,7 +252,7 @@ font-size:24px;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>615</width>
+     <width>598</width>
      <height>21</height>
     </rect>
    </property>
