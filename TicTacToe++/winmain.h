@@ -39,7 +39,7 @@ class winMain : public QMainWindow
 		/// <param name="checks">The array of checks.</param>
 		/// <param name="isX">Tell the function whether to verify against X (true) or O (false).</param>
 		/// <returns></returns>
-		btnSquare * checkMoves(int check[4][3], bool checkX);
+		btnSquare * checkMoves(int check[][3], bool checkX, int i);
 		btnSquare * computerMove();
 
 

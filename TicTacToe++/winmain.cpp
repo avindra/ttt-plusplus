@@ -153,12 +153,12 @@ void winMain::pressButton(btnSquare * which) {
 }
 
 
-btnSquare* winMain::checkMoves(int checks[][3], bool isX)
+btnSquare* winMain::checkMoves(int checks[][3], bool isX, int len)
 {
 	do
 	{
 		btnSquare * temp;
-		for (int i = sizeof(checks) - 1; i >= 0; --i)
+		for (int i = len; i >= 0; --i)
 		{
 			temp = (gameBoard->get(checks[i][0])->autoCheck(isX)
 				 && gameBoard->get(checks[i][1])->autoCheck(isX)
@@ -211,12 +211,12 @@ btnSquare* winMain::computerMove() {
 	//win
 	if (radHard->isChecked() || radImp->isChecked() || (radNormal->isChecked() && (qrand() % 2) >= 1))
 	{
-		if (temp = checkMoves(criticalChecks, false)) return temp;
+		if (temp = checkMoves(criticalChecks, false, 3)) return temp;
 	}
 	//defend
 	if (radHard->isChecked() || radImp->isChecked() || radNormal->isChecked())
 	{
-		if (temp = checkMoves(criticalChecks, true)) return temp;
+		if (temp = checkMoves(criticalChecks, true, 3)) return temp;
 	}
 
 	if(radImp->isChecked())
@@ -247,7 +247,7 @@ btnSquare* winMain::computerMove() {
 			{1, 7, 6},
 			{6, 7, 1}
 		};
-		if (temp = checkMoves(forks, false)) return temp;
+		if (temp = checkMoves(forks, false, 15)) return temp;
 		//<-------------------------------------------------------------------------->
 		//							BLOCK FORKING
 		//<-------------------------------------------------------------------------->
@@ -273,7 +273,7 @@ btnSquare* winMain::computerMove() {
 			{1, 7, 6},
 			{6, 7, 1}
 		};
-		if (temp = checkMoves(bForks, true)) return temp;
+		if (temp = checkMoves(bForks, true, 14)) return temp;
 		//<--d-->
 		bool defend = false;
 		btnSquare * badbut;
@@ -300,6 +300,7 @@ btnSquare* winMain::computerMove() {
 				{
 					theMove = gameBoard->get((qrand() % 7) + 1);
 				}
+				gameBoard->reorient();
 				return theMove;
 			}
 		} while (gameBoard->rotate());

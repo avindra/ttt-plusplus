@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'winmain.h'
 **
-** Created: Wed Jan 5 16:36:38 2011
+** Created: Thu Jan 6 00:34:16 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!
