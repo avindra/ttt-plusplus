@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'btnSquare.h'
 **
-** Created: Fri Dec 24 17:00:10 2010
+** Created: Thu Jan 27 10:18:08 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!
