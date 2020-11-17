@@ -15,30 +15,30 @@ const int winPaths[8][3] = {
 	{2, 4, 6}
 };
 
+/**
+ * Check if there is a winner.
+ * 
+ * Outcomes:
+ *  0: No winner
+ *  1: X is the winner
+ *  2: O is the winner
+ */
 int Game::checkWinner(Board* board) {
-	int winRar = 0;
 	for(int j = 7; j >= 0; --j) {
 		int xCount = 0, oCount = 0;
 		for(int i = 2; i >=0; --i) {
 			btnSquare * temp = board->get(winPaths[j][i]);
-			if(temp->isX())
-			{
-				if(++xCount == 3)
-				{
-					winRar = 1;
-					break;
-				} else if(oCount != 0) break;
-			} else if(temp->isO())
-			{
-				if(++oCount==3)
-				{
-					winRar = 2;
-					break;
-				} else if(xCount != 0) break;
+			if(temp->isX()) {
+				if(++xCount == 3) {
+					return 1;
+				}
+			} else if(temp->isO()) {
+				if(++oCount==3) {
+					return 2;
+				}
 			}
 		}
-		if(winRar != 0) break;
 	}
 
-	return winRar;
+	return 0;
 }
