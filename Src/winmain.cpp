@@ -3,6 +3,7 @@
 #include <QKeyEvent>
 
 #include "AI.h"
+#include "Game.h"
 
 winMain::winMain(QWidget *parent, Qt::WindowFlags flags)
 	: QMainWindow(parent, flags)
@@ -85,43 +86,7 @@ void winMain::newGame() {
 }
 
 bool winMain::winner(bool isComp) {
-	int winPaths[8][3] = {
-		{0, 1, 2},
-		{3, 4, 5},
-		{6, 7, 8},
-
-		// vertical
-		{0, 3, 6},
-		{1, 4, 7},
-		{2, 5, 8},
-
-		// diagonal
-		{0, 4, 8},
-		{2, 4, 6}
-	};
-	int winRar = 0;
-	for(int j = 7; j >= 0; --j) {
-		int xCount = 0, oCount = 0;
-		for(int i = 2; i >=0; --i) {
-			btnSquare * temp = gameBoard->get(winPaths[j][i]);
-			if(temp->isX())
-			{
-				if(++xCount == 3)
-				{
-					winRar = 1;
-					break;
-				} else if(oCount != 0) break;
-			} else if(temp->isO())
-			{
-				if(++oCount==3)
-				{
-					winRar = 2;
-					break;
-				} else if(xCount != 0) break;
-			}
-		}
-		if(winRar != 0) break;
-	}
+	int winRar = Game::checkWinner(gameBoard);
 	if(winRar != 0)
 	{
 		if(QMessageBox::question(this, "We have a winner!", (isComp ? "The computer (" : "") + QString(winRar==1 ? "X" : "O") + (isComp ? ")" : "") + " wins!!\n\nPlay again?", QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
