@@ -1,5 +1,3 @@
 build/
 CMakeFiles/
 *_autogen/
-
-Makefile
