@@ -156,40 +156,12 @@ void winMain::pressButton(btnSquare * which) {
 	xHasTurn = !xHasTurn;
 }
 
-
-btnSquare* winMain::checkMoves(int checks[][3], bool isX, int len)
-{
-	do
-	{
-		btnSquare * _temp;
-		for (int i = len; i >= 0; --i)
-		{
-			_temp = (gameBoard->get(checks[i][0])->autoCheck(isX)
-				 && gameBoard->get(checks[i][1])->autoCheck(isX)
-				 && gameBoard->get(checks[i][2])->isEnabled())
-
-				 ? gameBoard->get(checks[i][2])
-				 : 0;
-			if (_temp)
-			{
-				taunt->setText("Move calculated! " + QString::number(checks[i][0]) + " | " + QString::number(checks[i][1]) + " | " + QString::number(checks[i][2]));
-				gameBoard->reorient();
-				return _temp;
-			}
-		}
-	} while (gameBoard->rotate());
-	return 0;
-}
-
-btnSquare* winMain::computerMove() {
-	return AI::computerMove(radImp->isChecked(), radHard->isChecked(), radNormal->isChecked());
-}
-
 void winMain::btnPressed() {
 	pressButton((btnSquare * ) sender());
 	if (winner(false)) return;
 	if (radComputer->isChecked()) {
-		pressButton(computerMove());
+		btnSquare* computerChoice = AI::computerMove(gameBoard, taunt, radImp->isChecked(), radHard->isChecked(), radNormal->isChecked());
+		pressButton(computerChoice);
 		if(winner(true)) return;
 	}
 }

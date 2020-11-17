@@ -1,12 +1,40 @@
 #include "AI.h"
 
 /**
+ * TODO: doc
+ */
+btnSquare* AI::checkMoves(QLabel* taunt, Board* board, int checks[][3], bool isX, int len)
+{
+	do
+	{
+		btnSquare * _temp;
+		for (int i = len; i >= 0; --i)
+		{
+			_temp = (board->get(checks[i][0])->autoCheck(isX)
+				 && board->get(checks[i][1])->autoCheck(isX)
+				 && board->get(checks[i][2])->isEnabled())
+
+				 ? board->get(checks[i][2])
+				 : 0;
+			if (_temp)
+			{
+				taunt->setText("Move calculated! " + QString::number(checks[i][0]) + " | " + QString::number(checks[i][1]) + " | " + QString::number(checks[i][2]));
+				board->reorient();
+				return _temp;
+			}
+		}
+	} while (board->rotate());
+	return 0;
+}
+
+
+/**
  * Logic for the computer's decision making
  * at all difficulty levels.
  * 
  * @see https://en.wikipedia.org/wiki/Tic-tac-toe#Strategy
  */
-btnSquare* AI::computerMove(bool isImpossible, bool isHard, bool isNormal) {
+btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool isHard, bool isNormal) {
 	int criticalChecks[4][3] = {
 		{0, 1, 2},
 		/*
@@ -41,7 +69,7 @@ btnSquare* AI::computerMove(bool isImpossible, bool isHard, bool isNormal) {
 	//win
 	if (isHard || isImpossible || (isNormal && (qrand() % 2) >= 1))
 	{
-		if (temp = checkMoves(criticalChecks, false, 3)) {
+		if (temp = checkMoves(taunt, board, criticalChecks, false, 3)) {
 			taunt->setText("I see an opportunity! You lose! Fear my awesome power!");
 			return temp;
 		}
@@ -49,7 +77,7 @@ btnSquare* AI::computerMove(bool isImpossible, bool isHard, bool isNormal) {
 	//defend
 	if (isHard || isImpossible || isNormal)
 	{
-		if (temp = checkMoves(criticalChecks, true, 3)) {
+		if (temp = checkMoves(taunt, board, criticalChecks, true, 3)) {
 			taunt->setText("I block your dumb ass!");
 			return temp;
 		}
@@ -83,7 +111,7 @@ btnSquare* AI::computerMove(bool isImpossible, bool isHard, bool isNormal) {
 			{1, 7, 6},
 			{6, 7, 1}
 		};
-		if (temp = checkMoves(forks, false, 15)) {
+		if (temp = checkMoves(taunt, board, forks, false, 15)) {
 			taunt->setText("Muahahaha! Checkmate, bitch!");
 			return temp;
 		}
@@ -112,7 +140,7 @@ btnSquare* AI::computerMove(bool isImpossible, bool isHard, bool isNormal) {
 			{0, 3, 1},
 			{3, 1, 0}
 		};
-		if (temp = checkMoves(bForks, true, 14)) {
+		if (temp = checkMoves(taunt, board, bForks, true, 14)) {
 			taunt->setText("I see what you did there... Blocked your fork, loser!");
 			return temp;
 		}
@@ -129,26 +157,26 @@ btnSquare* AI::computerMove(bool isImpossible, bool isHard, bool isNormal) {
 			for(int i = 2; i >= 0; --i) {
 				int innerTest[3];
 				memcpy(innerTest, tests[i], sizeof(innerTest));
-				if (gameBoard->get(innerTest[0])->isX() && gameBoard->get(innerTest[1])->isX() && (gameBoard->get(innerTest[2])->isEnabled() || gameBoard->get(8)->isEnabled()))
+				if (board->get(innerTest[0])->isX() && board->get(innerTest[1])->isX() && (board->get(innerTest[2])->isEnabled() || board->get(8)->isEnabled()))
 				{
 					defend = true;
-					badbut = gameBoard->get(innerTest[2]);
+					badbut = board->get(innerTest[2]);
 				}
 			}
 			if (defend)
 			{
-				btnSquare * theMove = gameBoard->get(0);
-				while (!theMove->isEnabled() || theMove == badbut || theMove == gameBoard->get(8))
+				btnSquare * theMove = board->get(0);
+				while (!theMove->isEnabled() || theMove == badbut || theMove == board->get(8))
 				{
-					theMove = gameBoard->get((qrand() % 7) + 1);
+					theMove = board->get((qrand() % 7) + 1);
 				}
-				gameBoard->reorient();
+				board->reorient();
 				return theMove;
 			}
-		} while (gameBoard->rotate());
+		} while (board->rotate());
 		//center
-		if (gameBoard->get(4)->isEnabled())
-			return gameBoard->get(4);
+		if (board->get(4)->isEnabled())
+			return board->get(4);
 		//opposite corner
 		int opposites[2][2] = {
 			{0, 8},
@@ -158,11 +186,11 @@ btnSquare* AI::computerMove(bool isImpossible, bool isHard, bool isNormal) {
 			int inner[2];
 			memcpy(inner, opposites[i], sizeof(inner));
 
-			temp = gameBoard->get(inner[1]);
-			if (gameBoard->get(inner[0])->isX() && temp->isEnabled()) return temp;
+			temp = board->get(inner[1]);
+			if (board->get(inner[0])->isX() && temp->isEnabled()) return temp;
 
-			temp = gameBoard->get(inner[0]);
-			if (gameBoard->get(inner[1])->isX() && temp->isEnabled()) return temp;
+			temp = board->get(inner[0]);
+			if (board->get(inner[1])->isX() && temp->isEnabled()) return temp;
 		}
 
 		// TODO: If corners, and similarly sides, are all taken up, then
@@ -177,10 +205,10 @@ btnSquare* AI::computerMove(bool isImpossible, bool isHard, bool isNormal) {
 
 			6,  8
 		};
-		temp = gameBoard->get(corners[qrand() % 3]);
+		temp = board->get(corners[qrand() % 3]);
 		while (!temp->isEnabled())
 		{
-			temp = gameBoard->get(corners[qrand() % 3]);
+			temp = board->get(corners[qrand() % 3]);
 		}
 		if (temp->isEnabled()) return temp;
 		//empty side
@@ -189,20 +217,20 @@ btnSquare* AI::computerMove(bool isImpossible, bool isHard, bool isNormal) {
 		   3,  5,
 		     7  
 		};
-		temp = gameBoard->get(sides[qrand() % 3]);
+		temp = board->get(sides[qrand() % 3]);
 		while (!temp->isEnabled())
 		{
-			temp = gameBoard->get(sides[qrand() % 3]);
+			temp = board->get(sides[qrand() % 3]);
 		}
 		return temp;
 	}
 
 	// randomly play a remaining square
 	// Theoretically, the code will never reach here.
-	temp = gameBoard->get(qrand() % 8);
+	temp = board->get(qrand() % 8);
 	while (!temp->isEnabled())
 	{
-		temp = gameBoard->get(qrand() % 8);
+		temp = board->get(qrand() % 8);
 	}
 	return temp;
 }

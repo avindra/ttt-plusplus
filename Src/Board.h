@@ -1,3 +1,5 @@
+#pragma once
+
 #include "btnSquare.h"
 
 class Board
