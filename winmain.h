@@ -1,7 +1,7 @@
 #ifndef WINMAIN_H
 #define WINMAIN_H
 
-#include <QtGui/QMainWindow>
+#include <QtWidgets/QMainWindow>
 #include "ui_winmain.h"
 #include "Board.h"
 // Don't include "btnSquare.h", it's included in Board.h
@@ -22,7 +22,7 @@ class winMain : public QMainWindow
 		QLabel * whoseTurn, * taunt;
 
 		// Construct / destruct
-		winMain(QWidget *parent = 0, Qt::WFlags flags = 0);
+		winMain(QWidget *parent = 0, Qt::WindowFlags flags = 0);
 		~winMain();
 
 		// Returns whether or not there's a winner.

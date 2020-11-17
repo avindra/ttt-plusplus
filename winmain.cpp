@@ -2,7 +2,7 @@
 #include <QMessageBox>
 #include <QKeyEvent>
 
-winMain::winMain(QWidget *parent, Qt::WFlags flags)
+winMain::winMain(QWidget *parent, Qt::WindowFlags flags)
 	: QMainWindow(parent, flags)
 {
 	xHasTurn = true;
