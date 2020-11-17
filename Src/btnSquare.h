@@ -1,3 +1,5 @@
+#pragma once
+
 #include <QPushButton>
 
 class btnSquare : public QPushButton

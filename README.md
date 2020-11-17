@@ -8,18 +8,11 @@ Originally built at [code.google.com](http://code.google.com/p/ttt-plusplus).
 
 This project aims to be the finest implementation of Tic-Tac-Toe around in C++.
 
-The C# version of this project is where all of this started: http://code.google.com/p/tic-tac-toe-dotnet/ ([github](https://github.com/avindra/tic-tac-toe-dotnet
-))
+You may also be interested in the [C# version of this project](https://github.com/avindra/tic-tac-toe-dotnet), which this repository is based on.
 
 ## Stack
 
-Developing C++ apps with GUI's is still difficult and lacking in documentation. Thankfully, there are some well-documented frameworks such as Qt which ease this process and make your projects portable.
-
-Historically speaking, in 2010 I chose Qt over wxWidgets because wx was incredibly difficult to set up and was painful to use. Qt was similarly a challenge to set up, but once it was set up, it was easy to use.
-
-Qt was also relicensed to LGPL, which enabled me to use the framework free of charge.
-
-This project is built with statically linked 32-bit libraries for Qt. If you have trouble building, feel free to ask about it.
+See the [ttt-plusplus wiki](https://github.com/avindra/ttt-plusplus/wiki) for information on software, building, testing, etc.
 
 ## Who this is intended for
 

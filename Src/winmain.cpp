@@ -2,6 +2,7 @@
 #include <QMessageBox>
 #include <QKeyEvent>
 
+
 winMain::winMain(QWidget *parent, Qt::WindowFlags flags)
 	: QMainWindow(parent, flags)
 {
@@ -417,13 +418,13 @@ void winMain::keyPressEvent(QKeyEvent * e) {
 }
 
 void winMain::aboutGame() {
-	QMessageBox::about(this, "About this game", "<h1>Tic-Tac-Toe++</h1><p>This game was made mostly by Avindra Vishal Goolcharan. It is not licensed for commercial purposes, and is expressly restricted from such activity under <a href=\"http://creativecommons.org/licenses/by-nc-nd/3.0/\">Creative Commons <small>(Attribution-Noncommercial-No Derivative Works)</small> 3.0 Unported</a>.</p><p>For a history of this application and more, see the <a href=\"http://code.google.com/p/ttt-plusplus/\">project's homepage</a> on Google Code.</p>");
+	QMessageBox::about(this, "About this game", "<h1>Tic-Tac-Toe++</h1><p>Made by Avindra Vishal Goolcharan. It is not licensed for commercial purposes, and is expressly restricted from such activity under <a href=\"http://creativecommons.org/licenses/by-nc-nd/3.0/\">Creative Commons <small>(Attribution-Noncommercial-No Derivative Works)</small> 3.0 Unported</a>.</p><p>For a history of this application and more, see the <a href=\"https://github.com/avindra/ttt-plusplus/\">project's homepage</a> on GitHub.</p>");
 }
 
 void winMain::aboutQt() {
 	QMessageBox::aboutQt(this);
 }
 
-winMain::~winMain()
-{
-}
+winMain::~winMain() {}
+
+
