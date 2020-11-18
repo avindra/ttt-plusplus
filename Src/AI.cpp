@@ -1,10 +1,12 @@
 #include "AI.h"
 
 /**
- * TODO: doc
+ * Checks MUST contain at least one
+ * path to check.
  */
-btnSquare* AI::checkMoves(QLabel* taunt, Board* board, int checks[][3], bool isX, int len)
+btnSquare* AI::checkMoves(QLabel* taunt, Board* board, int checks[][3], bool isX)
 {
+	int len = sizeof(checks) / sizeof(checks[0]);
 	do
 	{
 		btnSquare * _temp;
@@ -24,7 +26,44 @@ btnSquare* AI::checkMoves(QLabel* taunt, Board* board, int checks[][3], bool isX
 			}
 		}
 	} while (board->rotate());
+
+	board->reorient();
 	return 0;
+}
+
+/**
+ * From a list of possible plays,
+ * randomly select an available
+ * one.
+ */
+btnSquare* AI::pickMove(int _list[], Board* board) {
+	std::vector<int> vc_list(_list, _list + sizeof _list / sizeof _list [0]);
+	std::vector<int> vc_out;
+
+	// C++ .filter https://stackoverflow.com/a/21204788/270302
+	std::copy_if (
+		vc_list.begin(), vc_list.end(),
+		std::back_inserter(vc_out),
+		[&board](int i){
+			btnSquare* btn = board->get(i);
+			return btn->isEnabled();
+		}
+	);
+
+	int* list = vc_out.data();
+
+	int length = sizeof(list) / list[0];
+	// no possible moves left.
+	if (length == 0) {
+		return nullptr;
+	} else if (length == 1) {
+		return board->get(list[0]);
+	}
+
+	// randomly pick available one from the list
+	int operand = length - 1;
+	int idx = qrand() % operand;
+	return board->get(list[idx]);
 }
 
 
@@ -64,22 +103,25 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 			_ _ _
 		*/
 	};
-	btnSquare * temp;
+
+	// generic reference to a button which can
+	// possibly be selected as the computer's move
+	btnSquare * play;
 
 	//win
 	if (isHard || isImpossible || (isNormal && (qrand() % 2) >= 1))
 	{
-		if (temp = checkMoves(taunt, board, criticalChecks, false, 3)) {
+		if (play = checkMoves(taunt, board, criticalChecks, false)) {
 			taunt->setText("Well played! Better luck next time :)");
-			return temp;
+			return play;
 		}
 	}
 	//defend
 	if (isHard || isImpossible || isNormal)
 	{
-		if (temp = checkMoves(taunt, board, criticalChecks, true, 3)) {
+		if (play = checkMoves(taunt, board, criticalChecks, true)) {
 			taunt->setText("Not so fast!!");
-			return temp;
+			return play;
 		}
 	}
 
@@ -111,9 +153,9 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 			{1, 7, 6},
 			{6, 7, 1}
 		};
-		if (temp = checkMoves(taunt, board, forks, false, 15)) {
+		if (play = checkMoves(taunt, board, forks, false)) {
 			taunt->setText("Now there are two ;)");
-			return temp;
+			return play;
 		}
 		//<-------------------------------------------------------------------------->
 		//							BLOCK FORKING
@@ -140,11 +182,11 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 			{0, 3, 1},
 			{3, 1, 0}
 		};
-		if (temp = checkMoves(taunt, board, bForks, true, 14)) {
+		if (play = checkMoves(taunt, board, bForks, true)) {
 			taunt->setText("There can only be one");
-			return temp;
+			return play;
 		}
-		//<--d-->
+
 		bool defend = false;
 		btnSquare * badbut;
 		do
@@ -186,18 +228,12 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 			int inner[2];
 			memcpy(inner, opposites[i], sizeof(inner));
 
-			temp = board->get(inner[1]);
-			if (board->get(inner[0])->isX() && temp->isEnabled()) return temp;
+			play = board->get(inner[1]);
+			if (board->get(inner[0])->isX() && play->isEnabled()) return play;
 
-			temp = board->get(inner[0]);
-			if (board->get(inner[1])->isX() && temp->isEnabled()) return temp;
+			play = board->get(inner[0]);
+			if (board->get(inner[1])->isX() && play->isEnabled()) return play;
 		}
-
-		// TODO: If corners, and similarly sides, are all taken up, then
-		// the code will result in an infinite loop.
-		// 
-		// This has never happened, which means the code below isn't even
-		// being reached.
 
 		//empty corner
 		int corners[4] = {
@@ -205,32 +241,23 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 
 			6,  8
 		};
-		temp = board->get(corners[qrand() % 3]);
-		while (!temp->isEnabled())
-		{
-			temp = board->get(corners[qrand() % 3]);
-		}
-		if (temp->isEnabled()) return temp;
+		play = pickMove(corners, board);
+
+		if (play && play->isEnabled()) return play;
+
 		//empty side
 		int sides[4] = {
 			 1, 
 		   3,  5,
 		     7  
 		};
-		temp = board->get(sides[qrand() % 3]);
-		while (!temp->isEnabled())
-		{
-			temp = board->get(sides[qrand() % 3]);
-		}
-		return temp;
+		play = pickMove(sides, board);
+		if (play && play->isEnabled()) return play;
 	}
 
-	// randomly play a remaining square
-	// Theoretically, the code will never reach here.
-	temp = board->get(qrand() % 8);
-	while (!temp->isEnabled())
-	{
-		temp = board->get(qrand() % 8);
-	}
-	return temp;
+
+	// randomly play any remaining square.
+	// Theoretically, the code should never get here.
+	int entireBoard[9] = {0,1,2,3,4,5,6,7,8};
+	return pickMove(entireBoard, board);
 }

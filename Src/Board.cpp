@@ -70,6 +70,12 @@ bool Board::rotate() {
 	return true;
 }
 
+/**
+ * MUST be called for
+ * any rotators who
+ * are not returning
+ * to unity.
+ */
 void Board::reorient() {
 	orientation = 0;
 }
