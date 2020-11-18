@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.8.2)
 
 project(ttt-plusplus)
 
+# Enable latest lang features
+set(CMAKE_CXX_STANDARD 17)
+
 # Find includes in the build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 

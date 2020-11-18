@@ -51,9 +51,9 @@ btnSquare* AI::pickMove(int len, int* src, Board* board) {
 		}
 	);
 
-	int* list = vc_out.data();
+	auto list = vc_out.data();
 
-	int length = sizeof(list) / list[0];
+	int length = vc_out.size();
 	// no possible moves left.
 	if (length == 0) {
 		return nullptr;
@@ -75,7 +75,7 @@ btnSquare* AI::pickMove(int len, int* src, Board* board) {
  * @see https://en.wikipedia.org/wiki/Tic-tac-toe#Strategy
  */
 btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool isHard, bool isNormal) {
-	int criticalChecks[4][3] = {
+	int criticalChecks[][3] = {
 		{0, 1, 2},
 		/*
 			O O ?
@@ -110,7 +110,7 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 	btnSquare * play;
 
 
-	int numCriticalChecks = sizeof(criticalChecks) / sizeof (criticalChecks[0]);
+	int numCriticalChecks = std::size(criticalChecks);
 	//win
 	if (isHard || isImpossible || (isNormal && (rand() % 2) >= 1))
 	{
@@ -134,7 +134,7 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 		//<-------------------------------------------------------------------------->
 		//								   FORKING
 		//<-------------------------------------------------------------------------->
-		int forks[16][3] = {
+		int forks[][3] = {
  			//<--a-->
 			{0, 2, 4},
 			{0, 4, 2},
@@ -157,14 +157,14 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 			{1, 7, 6},
 			{6, 7, 1}
 		};
-		if ((play = checkMoves(taunt, board, sizeof(forks)/sizeof(forks[0]), forks, false))) {
+		if ((play = checkMoves(taunt, board, std::size(forks), forks, false))) {
 			taunt->setText("Now there are two ;)");
 			return play;
 		}
 		//<-------------------------------------------------------------------------->
 		//							BLOCK FORKING
 		//<-------------------------------------------------------------------------->
-		int bForks[15][3] = {
+		int bForks[][3] = {
 			//<--e-->
 			{1, 6, 7},
 			{1, 7, 6},
@@ -186,7 +186,7 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 			{0, 3, 1},
 			{3, 1, 0}
 		};
-		if ((play = checkMoves(taunt, board, sizeof(bForks) / sizeof(bForks[0]), bForks, true))) {
+		if ((play = checkMoves(taunt, board, std::size(bForks), bForks, true))) {
 			taunt->setText("There can only be one");
 			return play;
 		}
@@ -195,12 +195,12 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 		btnSquare * badbut;
 		do
 		{
-			int tests[3][3] = {
+			int tests[][3] = {
 				{0, 6, 2},
  				{0, 2, 6},
 				{6, 2, 0}
 			};
-			for(int i = 2; i >= 0; --i) {
+			for(int i = std::size(tests) - 1; i >= 0; --i) {
 				int innerTest[3];
 				memcpy(innerTest, tests[i], sizeof(innerTest));
 				if (board->get(innerTest[0])->isX() && board->get(innerTest[1])->isX() && (board->get(innerTest[2])->isEnabled() || board->get(8)->isEnabled()))
@@ -224,11 +224,11 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 		if (board->get(4)->isEnabled())
 			return board->get(4);
 		//opposite corner
-		int opposites[2][2] = {
+		int opposites[][2] = {
 			{0, 8},
 			{3, 7}
 		};
-		for(int i = 1; i >= 0; --i) {
+		for(int i = std::size(opposites) - 1; i >= 0; --i) {
 			int inner[2];
 			memcpy(inner, opposites[i], sizeof(inner));
 
@@ -240,7 +240,7 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 		}
 
 		//empty corner
-		int corners[4] = {
+		int corners[] = {
 			0,  2,
 
 			6,  8
@@ -250,7 +250,7 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 		if (play && play->isEnabled()) return play;
 
 		//empty side
-		int sides[4] = {
+		int sides[] = {
 			 1, 
 		   3,  5,
 		     7  
@@ -262,6 +262,6 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 
 	// randomly play any remaining square.
 	// Theoretically, the code should never get here.
-	int entireBoard[9] = {0,1,2,3,4,5,6,7,8};
-	return pickMove(9, entireBoard, board);
+	int entireBoard[] = {0,1,2,3,4,5,6,7,8};
+	return pickMove(std::size(entireBoard), entireBoard, board);
 }
