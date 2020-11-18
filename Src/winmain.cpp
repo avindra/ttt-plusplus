@@ -5,8 +5,7 @@
 #include "AI.h"
 #include "Game.h"
 
-winMain::winMain(QWidget *parent, Qt::WindowFlags flags)
-	: QMainWindow(parent, flags)
+winMain::winMain(QWidget *parent) : QMainWindow(parent)
 {
 	xHasTurn = true;
 	ui.setupUi(this);

@@ -62,7 +62,7 @@ btnSquare* AI::pickMove(int _list[], Board* board) {
 
 	// randomly pick available one from the list
 	int operand = length - 1;
-	int idx = qrand() % operand;
+	int idx = rand() % operand;
 	return board->get(list[idx]);
 }
 
@@ -109,9 +109,9 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 	btnSquare * play;
 
 	//win
-	if (isHard || isImpossible || (isNormal && (qrand() % 2) >= 1))
+	if (isHard || isImpossible || (isNormal && (rand() % 2) >= 1))
 	{
-		if (play = checkMoves(taunt, board, criticalChecks, false)) {
+		if ((play = checkMoves(taunt, board, criticalChecks, false))) {
 			taunt->setText("Well played! Better luck next time :)");
 			return play;
 		}
@@ -119,7 +119,7 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 	//defend
 	if (isHard || isImpossible || isNormal)
 	{
-		if (play = checkMoves(taunt, board, criticalChecks, true)) {
+		if ((play = checkMoves(taunt, board, criticalChecks, true))) {
 			taunt->setText("Not so fast!!");
 			return play;
 		}
@@ -153,7 +153,7 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 			{1, 7, 6},
 			{6, 7, 1}
 		};
-		if (play = checkMoves(taunt, board, forks, false)) {
+		if ((play = checkMoves(taunt, board, forks, false))) {
 			taunt->setText("Now there are two ;)");
 			return play;
 		}
@@ -182,7 +182,7 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 			{0, 3, 1},
 			{3, 1, 0}
 		};
-		if (play = checkMoves(taunt, board, bForks, true)) {
+		if ((play = checkMoves(taunt, board, bForks, true))) {
 			taunt->setText("There can only be one");
 			return play;
 		}
@@ -210,7 +210,7 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 				btnSquare * theMove = board->get(0);
 				while (!theMove->isEnabled() || theMove == badbut || theMove == board->get(8))
 				{
-					theMove = board->get((qrand() % 7) + 1);
+					theMove = board->get((rand() % 7) + 1);
 				}
 				board->reorient();
 				return theMove;
