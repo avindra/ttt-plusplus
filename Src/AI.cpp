@@ -70,7 +70,7 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 	if (isHard || isImpossible || (isNormal && (qrand() % 2) >= 1))
 	{
 		if (temp = checkMoves(taunt, board, criticalChecks, false, 3)) {
-			taunt->setText("I see an opportunity! You lose! Fear my awesome power!");
+			taunt->setText("Well played! Better luck next time :)");
 			return temp;
 		}
 	}
@@ -78,7 +78,7 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 	if (isHard || isImpossible || isNormal)
 	{
 		if (temp = checkMoves(taunt, board, criticalChecks, true, 3)) {
-			taunt->setText("I block your dumb ass!");
+			taunt->setText("Not so fast!!");
 			return temp;
 		}
 	}
@@ -112,7 +112,7 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 			{6, 7, 1}
 		};
 		if (temp = checkMoves(taunt, board, forks, false, 15)) {
-			taunt->setText("Muahahaha! Checkmate, bitch!");
+			taunt->setText("Now there are two ;)");
 			return temp;
 		}
 		//<-------------------------------------------------------------------------->
@@ -141,7 +141,7 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 			{3, 1, 0}
 		};
 		if (temp = checkMoves(taunt, board, bForks, true, 14)) {
-			taunt->setText("I see what you did there... Blocked your fork, loser!");
+			taunt->setText("There can only be one");
 			return temp;
 		}
 		//<--d-->
