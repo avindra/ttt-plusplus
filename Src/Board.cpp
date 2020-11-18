@@ -6,7 +6,7 @@ Board::Board() {
 Board::Board(btnSquare * ins) {
 	orientation = 0;
 	btns = ins;
-	int oSetup[8][9] = {
+	int oSetup[][9] = {
 		{ // north (standard)
 			0, 1, 2,
 			3, 4, 5,

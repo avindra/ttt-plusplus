@@ -1,6 +1,6 @@
 #include "Game.h"
 
-const int winPaths[8][3] = {
+const int winPaths[][3] = {
 	{0, 1, 2},
 	{3, 4, 5},
 	{6, 7, 8},
