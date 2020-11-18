@@ -4,39 +4,40 @@
  * Checks MUST contain at least one
  * path to check.
  */
-btnSquare* AI::checkMoves(QLabel* taunt, Board* board, int numChecks, int checks[][3], bool isX)
+btnSquare* AI::checkMoves(Board* board, int numChecks, int checks[][3], bool isX)
 {
+	for (int i = numChecks - 1; i >= 0; --i) {
+		auto row = checks[i];
 
-	do
-	{
-		btnSquare * _temp;
-		for (int i = numChecks - 1; i >= 0; --i)
-		{
-			auto row = checks[i];
+		auto A = row[0];
+		auto B = row[1];
+		auto C = row[2];
 
-			auto A = row[0];
-			auto B = row[1];
-			auto C = row[2];
+		do {
+			btnSquare* candidate;
 
 			auto spotA = board->get(A);
 			auto spotB = board->get(B);
 			auto spotC = board->get(C);
 
-			_temp = (spotA->autoCheck(isX) && spotB->autoCheck(isX) && spotC->isEnabled())
-				 ? board->get(C)
-				 : 0;
-			if (_temp)
-			{
-				taunt->setText("Move calculated! " + 
-					QString::number(A) + " | " +
-					QString::number(B) + " | " +
-					QString::number(C)
-				);
-				board->reorient();
-				return _temp;
+			// take any available configuration
+			if(spotA->autoCheck(isX) && spotB->autoCheck(isX) && spotC->isEnabled()) {
+				candidate = spotC;
+			} else if(spotA->autoCheck(isX) && spotB->isEnabled() && spotC->autoCheck(isX)) {
+				candidate = spotB;
+			} else if(spotA->isEnabled() && spotB->autoCheck(isX) && spotC->autoCheck(isX)) {
+				candidate = spotA;
+			} else {
+				candidate = 0;
 			}
-		}
-	} while (board->rotate());
+
+			if (candidate)
+			{
+				board->reorient();
+				return candidate;
+			}
+		} while (board->rotate());
+	} 
 
 	board->reorient();
 	return 0;
@@ -85,6 +86,7 @@ btnSquare* AI::pickMove(int len, int* src, Board* board) {
  * @see https://en.wikipedia.org/wiki/Tic-tac-toe#Strategy
  */
 btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool isHard, bool isNormal) {
+	// similar to Game.cpp winpaths
 	int criticalChecks[][3] = {
 		{0, 1, 2},
 		/*
@@ -104,9 +106,6 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 			_ O _
 			_ _ ?
 		*/
-		// I excluded 804 / 084, because later on, the 
-		// center would be picked anyway. Similar coding
-		// strategy is used further down as well.
 		{3, 4, 5}
 		/*
 			_ _ _
@@ -124,15 +123,15 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 	//win
 	if (isHard || isImpossible || (isNormal && (rand() % 2) >= 1))
 	{
-		if ((play = checkMoves(taunt, board, numCriticalChecks, criticalChecks, false))) {
-			taunt->setText("Well played! Better luck next time :)");
+		if ((play = checkMoves(board, numCriticalChecks, criticalChecks, false))) {
+			taunt->setText("Good game... better luck next time ;)");
 			return play;
 		}
 	}
 	//defend
 	if (isHard || isImpossible || isNormal)
 	{
-		if ((play = checkMoves(taunt, board, numCriticalChecks, criticalChecks, true))) {
+		if ((play = checkMoves(board, numCriticalChecks, criticalChecks, true))) {
 			taunt->setText("Not so fast!!");
 			return play;
 		}
@@ -158,23 +157,9 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 			{0, 3, 1},
 			{3, 1, 0},
 			//<--d-->
-			{0, 8, 6},
 			{0, 6, 2},
 			{0, 2, 6},
 			{6, 2, 0},
-			//<--e-->
-			{1, 6, 7},
-			{1, 7, 6},
-			{6, 7, 1}
-		};
-		if ((play = checkMoves(taunt, board, std::size(forks), forks, false))) {
-			taunt->setText("Now there are two ;)");
-			return play;
-		}
-		//<-------------------------------------------------------------------------->
-		//							BLOCK FORKING
-		//<-------------------------------------------------------------------------->
-		int bForks[][3] = {
 			//<--e-->
 			{1, 6, 7},
 			{1, 7, 6},
@@ -183,20 +168,19 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 			{0, 2, 5},
 			{0, 5, 2},
 			{5, 2, 0},
- 			//<--a-->
-			{0, 2, 4},
-			{0, 4, 2},
-			{2, 4, 0},
-			//<--b-->
-			{4, 6, 7},
-			{4, 7, 6},
-			{7, 6, 4},
-			//<--c-->
-			{0, 1, 3},
-			{0, 3, 1},
-			{3, 1, 0}
+			//<!--g-->
+			{0, 8, 6},
+			{0, 6, 8},
+			{6, 8, 0},
 		};
-		if ((play = checkMoves(taunt, board, std::size(bForks), bForks, true))) {
+
+		if ((play = checkMoves(board, std::size(forks), forks, false))) {
+			// todo: not always true
+			taunt->setText("Now there are two ;)");
+			return play;
+		}
+
+		if ((play = checkMoves(board, std::size(forks), forks, true))) {
 			taunt->setText("There can only be one");
 			return play;
 		}

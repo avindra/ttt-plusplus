@@ -13,8 +13,7 @@ public:
 
 private:
 
-	// todo: remove taunt
-	static btnSquare * checkMoves(QLabel* taunt, Board* a, int numChecks, int check[][3], bool checkX);
+	static btnSquare * checkMoves(Board* a, int numChecks, int check[][3], bool checkX);
 
 	/**
 	 * Given a list of indices,
