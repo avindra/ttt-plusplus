@@ -4,23 +4,24 @@
  * Checks MUST contain at least one
  * path to check.
  */
-btnSquare* AI::checkMoves(QLabel* taunt, Board* board, int checks[][3], bool isX)
+btnSquare* AI::checkMoves(QLabel* taunt, Board* board, int numChecks, int checks[][3], bool isX)
 {
-	int len = sizeof(checks) / sizeof(checks[0]);
+
 	do
 	{
 		btnSquare * _temp;
-		for (int i = len; i >= 0; --i)
+		for (int i = numChecks - 1; i >= 0; --i)
 		{
-			_temp = (board->get(checks[i][0])->autoCheck(isX)
-				 && board->get(checks[i][1])->autoCheck(isX)
-				 && board->get(checks[i][2])->isEnabled())
+			auto row = checks[i];
+			_temp = (board->get(row[0])->autoCheck(isX)
+				 && board->get(row[1])->autoCheck(isX)
+				 && board->get(row[2])->isEnabled())
 
-				 ? board->get(checks[i][2])
+				 ? board->get(row[2])
 				 : 0;
 			if (_temp)
 			{
-				taunt->setText("Move calculated! " + QString::number(checks[i][0]) + " | " + QString::number(checks[i][1]) + " | " + QString::number(checks[i][2]));
+				taunt->setText("Move calculated! " + QString::number(row[0]) + " | " + QString::number(row[1]) + " | " + QString::number(row[2]));
 				board->reorient();
 				return _temp;
 			}
@@ -36,8 +37,8 @@ btnSquare* AI::checkMoves(QLabel* taunt, Board* board, int checks[][3], bool isX
  * randomly select an available
  * one.
  */
-btnSquare* AI::pickMove(int _list[], Board* board) {
-	std::vector<int> vc_list(_list, _list + sizeof _list / sizeof _list [0]);
+btnSquare* AI::pickMove(int len, int* src, Board* board) {
+	std::vector<int> vc_list(src, src + len);
 	std::vector<int> vc_out;
 
 	// C++ .filter https://stackoverflow.com/a/21204788/270302
@@ -108,10 +109,12 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 	// possibly be selected as the computer's move
 	btnSquare * play;
 
+
+	int numCriticalChecks = sizeof(criticalChecks) / sizeof (criticalChecks[0]);
 	//win
 	if (isHard || isImpossible || (isNormal && (rand() % 2) >= 1))
 	{
-		if ((play = checkMoves(taunt, board, criticalChecks, false))) {
+		if ((play = checkMoves(taunt, board, numCriticalChecks, criticalChecks, false))) {
 			taunt->setText("Well played! Better luck next time :)");
 			return play;
 		}
@@ -119,7 +122,7 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 	//defend
 	if (isHard || isImpossible || isNormal)
 	{
-		if ((play = checkMoves(taunt, board, criticalChecks, true))) {
+		if ((play = checkMoves(taunt, board, numCriticalChecks, criticalChecks, true))) {
 			taunt->setText("Not so fast!!");
 			return play;
 		}
@@ -127,6 +130,7 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 
 	if(isImpossible)
 	{
+
 		//<-------------------------------------------------------------------------->
 		//								   FORKING
 		//<-------------------------------------------------------------------------->
@@ -153,7 +157,7 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 			{1, 7, 6},
 			{6, 7, 1}
 		};
-		if ((play = checkMoves(taunt, board, forks, false))) {
+		if ((play = checkMoves(taunt, board, sizeof(forks)/sizeof(forks[0]), forks, false))) {
 			taunt->setText("Now there are two ;)");
 			return play;
 		}
@@ -182,7 +186,7 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 			{0, 3, 1},
 			{3, 1, 0}
 		};
-		if ((play = checkMoves(taunt, board, bForks, true))) {
+		if ((play = checkMoves(taunt, board, sizeof(bForks) / sizeof(bForks[0]), bForks, true))) {
 			taunt->setText("There can only be one");
 			return play;
 		}
@@ -241,7 +245,7 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 
 			6,  8
 		};
-		play = pickMove(corners, board);
+		play = pickMove(4, corners, board);
 
 		if (play && play->isEnabled()) return play;
 
@@ -251,7 +255,7 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 		   3,  5,
 		     7  
 		};
-		play = pickMove(sides, board);
+		play = pickMove(4, sides, board);
 		if (play && play->isEnabled()) return play;
 	}
 
@@ -259,5 +263,5 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 	// randomly play any remaining square.
 	// Theoretically, the code should never get here.
 	int entireBoard[9] = {0,1,2,3,4,5,6,7,8};
-	return pickMove(entireBoard, board);
+	return pickMove(9, entireBoard, board);
 }
