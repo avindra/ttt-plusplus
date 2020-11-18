@@ -13,15 +13,25 @@ btnSquare* AI::checkMoves(QLabel* taunt, Board* board, int numChecks, int checks
 		for (int i = numChecks - 1; i >= 0; --i)
 		{
 			auto row = checks[i];
-			_temp = (board->get(row[0])->autoCheck(isX)
-				 && board->get(row[1])->autoCheck(isX)
-				 && board->get(row[2])->isEnabled())
 
-				 ? board->get(row[2])
+			auto A = row[0];
+			auto B = row[1];
+			auto C = row[2];
+
+			auto spotA = board->get(A);
+			auto spotB = board->get(B);
+			auto spotC = board->get(C);
+
+			_temp = (spotA->autoCheck(isX) && spotB->autoCheck(isX) && spotC->isEnabled())
+				 ? board->get(C)
 				 : 0;
 			if (_temp)
 			{
-				taunt->setText("Move calculated! " + QString::number(row[0]) + " | " + QString::number(row[1]) + " | " + QString::number(row[2]));
+				taunt->setText("Move calculated! " + 
+					QString::number(A) + " | " +
+					QString::number(B) + " | " +
+					QString::number(C)
+				);
 				board->reorient();
 				return _temp;
 			}
