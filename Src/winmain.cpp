@@ -5,6 +5,18 @@
 #include "AI.h"
 #include "Game.h"
 
+// relates to AI.Strategy enum
+const char* responses[]  = {
+	"Good game... better luck next time ;)",
+	"Not so fast!",
+	"Now there are two ;)",
+	"There can be only one",
+	"I am the Monad",
+	"Jinx ;)"
+	"...!",
+	"Now I'm truly lost",
+};
+
 winMain::winMain(QWidget *parent) : QMainWindow(parent)
 {
 	xHasTurn = true;
@@ -124,7 +136,9 @@ void winMain::btnPressed() {
 	pressButton((btnSquare * ) sender());
 	if (winner(false)) return;
 	if (radComputer->isChecked()) {
-		btnSquare* computerChoice = AI::computerMove(gameBoard, taunt, radImp->isChecked(), radHard->isChecked(), radNormal->isChecked());
+		auto decision = AI::computerMove(gameBoard, radImp->isChecked(), radHard->isChecked(), radNormal->isChecked());
+		btnSquare* computerChoice = decision.first;
+		taunt->setText(responses[decision.second]);
 		pressButton(computerChoice);
 		if(winner(true)) return;
 	}

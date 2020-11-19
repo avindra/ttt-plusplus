@@ -1,15 +1,24 @@
 #include "Board.h"
 
-#include <QtWidgets/QLabel>
+enum Strategy {
+	Win,
+	Defend,
+	Fork,
+	BlockFork,
+	Center,
+	OpposingCorner,
+	EmptySide,
+	Random,
+};
 
-/**
- * Todo: decouple QT 100% from this code.
- */
 class AI {
 public:
 
-	// todo: remove taunt
-	static btnSquare* computerMove(Board* a, QLabel* taunt, bool imp, bool hard, bool norm);
+	/**
+	 * Returns the outcome of a move,
+	 * and the reason it was picked.
+	 */
+	static std::pair<btnSquare*, Strategy> computerMove(Board* a, bool imp, bool hard, bool norm);
 
 private:
 

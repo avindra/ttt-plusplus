@@ -85,7 +85,7 @@ btnSquare* AI::pickMove(int len, int* src, Board* board) {
  * 
  * @see https://en.wikipedia.org/wiki/Tic-tac-toe#Strategy
  */
-btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool isHard, bool isNormal) {
+std::pair<btnSquare*, Strategy> AI::computerMove(Board* board, bool isImpossible, bool isHard, bool isNormal) {
 	// similar to Game.cpp winpaths
 	int criticalChecks[][3] = {
 		{0, 1, 2},
@@ -118,22 +118,19 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 	// possibly be selected as the computer's move
 	btnSquare * play;
 
-
 	int numCriticalChecks = std::size(criticalChecks);
 	//win
 	if (isHard || isImpossible || (isNormal && (rand() % 2) >= 1))
 	{
 		if ((play = checkMoves(board, numCriticalChecks, criticalChecks, false))) {
-			taunt->setText("Good game... better luck next time ;)");
-			return play;
+			return std::pair(play, Strategy::Win);
 		}
 	}
 	//defend
 	if (isHard || isImpossible || isNormal)
 	{
 		if ((play = checkMoves(board, numCriticalChecks, criticalChecks, true))) {
-			taunt->setText("Not so fast!!");
-			return play;
+			return std::pair(play, Strategy::Defend);
 		}
 	}
 
@@ -174,49 +171,53 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 			{6, 8, 0},
 		};
 
+		// todo: update Fork strategy to fork only if
+		// it can carry out a win.
 		if ((play = checkMoves(board, std::size(forks), forks, false))) {
-			// todo: not always true
-			taunt->setText("Now there are two ;)");
-			return play;
+			return std::pair(play, Strategy::Fork);
 		}
 
-		if ((play = checkMoves(board, std::size(forks), forks, true))) {
-			taunt->setText("There can only be one");
-			return play;
-		}
-
-		bool defend = false;
+		// This handles a special case of block forking,
+		// where the player MUST play a side (NOT a corner),
+		// or else the opponent will get opportunity to fork.
+		bool playSide = false;
 		btnSquare * badbut;
-		do
-		{
+		do {
 			int tests[][3] = {
 				{0, 6, 2},
- 				{0, 2, 6},
+				{0, 2, 6},
 				{6, 2, 0}
 			};
 			for(int i = std::size(tests) - 1; i >= 0; --i) {
-				int innerTest[3];
-				memcpy(innerTest, tests[i], sizeof(innerTest));
-				if (board->get(innerTest[0])->isX() && board->get(innerTest[1])->isX() && (board->get(innerTest[2])->isEnabled() || board->get(8)->isEnabled()))
-				{
-					defend = true;
-					badbut = board->get(innerTest[2]);
+				auto row = tests[i];
+				auto A = row[0];
+				auto B = row[1];
+				auto C = row[2];
+				if (board->get(A)->isX() && board->get(B)->isX() &&
+				   (board->get(C)->isEnabled() || board->get(8)->isEnabled())) {
+					playSide = true;
+					badbut = board->get(C);
 				}
 			}
-			if (defend)
+			if (playSide)
 			{
 				btnSquare * theMove = board->get(0);
-				while (!theMove->isEnabled() || theMove == badbut || theMove == board->get(8))
-				{
+				while (!theMove->isEnabled() || theMove == badbut || theMove == board->get(8)) {
 					theMove = board->get((rand() % 7) + 1);
 				}
 				board->reorient();
-				return theMove;
+				return std::pair(theMove, Strategy::BlockFork);
 			}
 		} while (board->rotate());
+
+		if ((play = checkMoves(board, std::size(forks), forks, true))) {
+			return std::pair(play, Strategy::BlockFork);
+		}
+
 		//center
 		if (board->get(4)->isEnabled())
-			return board->get(4);
+			return std::pair(board->get(4), Strategy::Center);
+
 		//opposite corner
 		int opposites[][2] = {
 			{0, 8},
@@ -227,10 +228,10 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 			memcpy(inner, opposites[i], sizeof(inner));
 
 			play = board->get(inner[1]);
-			if (board->get(inner[0])->isX() && play->isEnabled()) return play;
+			if (board->get(inner[0])->isX() && play->isEnabled()) return std::pair(play, Strategy::OpposingCorner);
 
 			play = board->get(inner[0]);
-			if (board->get(inner[1])->isX() && play->isEnabled()) return play;
+			if (board->get(inner[1])->isX() && play->isEnabled()) return std::pair(play, Strategy::OpposingCorner);
 		}
 
 		//empty corner
@@ -241,21 +242,20 @@ btnSquare* AI::computerMove(Board* board, QLabel* taunt, bool isImpossible, bool
 		};
 		play = pickMove(4, corners, board);
 
-		if (play && play->isEnabled()) return play;
+		if (play && play->isEnabled()) return std::pair(play, Strategy::OpposingCorner);
 
 		//empty side
 		int sides[] = {
-			 1, 
-		   3,  5,
-		     7  
+			   1,
+			 3,  5,
+			   7
 		};
 		play = pickMove(4, sides, board);
-		if (play && play->isEnabled()) return play;
+		if (play && play->isEnabled()) return std::pair(play, Strategy::EmptySide);
 	}
-
 
 	// randomly play any remaining square.
 	// Theoretically, the code should never get here.
 	int entireBoard[] = {0,1,2,3,4,5,6,7,8};
-	return pickMove(std::size(entireBoard), entireBoard, board);
+	return std::pair(pickMove(std::size(entireBoard), entireBoard, board), Strategy::Random);
 }
