@@ -12,14 +12,6 @@ public:
 
 	// The array of buttons on the board.
 	btnSquare * btns;
-
-	/**
-	 * A matrix of all possible board orientations (there are exactly 8).
-	 * These configurations enable us to walk a given path across all
-	 * of it's various (known) transformations.
-	 */
-	int orients[8][9]; 
-
 	// CONSTRUCTORS
 	
 	// The default constructor, which should never be used.
