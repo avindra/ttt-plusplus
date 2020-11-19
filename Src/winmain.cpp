@@ -172,7 +172,18 @@ void winMain::keyPressEvent(QKeyEvent * e) {
 }
 
 void winMain::aboutGame() {
-	QMessageBox::about(this, "About this game", "<h1>Tic-Tac-Toe++</h1><p>Made by Avindra Vishal Goolcharan. It is not licensed for commercial purposes, and is expressly restricted from such activity under <a href=\"http://creativecommons.org/licenses/by-nc-nd/3.0/\">Creative Commons <small>(Attribution-Noncommercial-No Derivative Works)</small> 3.0 Unported</a>.</p><p>For a history of this application and more, see the <a href=\"https://github.com/avindra/ttt-plusplus/\">project's homepage</a> on GitHub.</p>");
+	QMessageBox::about(this, "About this game", "<h1>ttt-plusplus</h1>"
+		"<sub>by avindra</sub>"
+		"<h2>About</h2>"
+		"<p>For a history of this application and more, see the <a href=\"https://github.com/avindra/ttt-plusplus/\">project's homepage</a> on GitHub.</p>"
+		"<p>Previously known as Tic-Tac-Toe++, this C++ implementation of tic-tac-toe is meant for reference in academic use by students and teachers.</p>"
+		"<h2>Contributors</h2>"
+		"<p>Thanks to everyone who helped over the years with validation or just playing for fun:"
+		"<ul>"
+		"<li>Google Code users</li>"
+		"<li>Friends</li>"
+		"</ul>"
+	);
 }
 
 void winMain::aboutQt() {
