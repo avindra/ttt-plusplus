@@ -7,6 +7,7 @@ enum Strategy {
 	BlockFork,
 	Center,
 	OpposingCorner,
+	EmptyCorner,
 	EmptySide,
 	Random,
 };

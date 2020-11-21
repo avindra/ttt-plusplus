@@ -242,7 +242,7 @@ std::pair<btnSquare*, Strategy> AI::computerMove(Board* board, bool isImpossible
 		};
 		play = pickMove(4, corners, board);
 
-		if (play && play->isEnabled()) return std::pair(play, Strategy::OpposingCorner);
+		if (play && play->isEnabled()) return std::pair(play, Strategy::EmptyCorner);
 
 		//empty side
 		int sides[] = {

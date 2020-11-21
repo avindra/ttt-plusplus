@@ -14,7 +14,7 @@ const char* responses[]  = {
 	"I am the Monad",
 	"Jinx ;)"
 	"...!",
-	"Now I'm truly lost",
+	"How did it come to this??",
 };
 
 winMain::winMain(QWidget *parent) : QMainWindow(parent)
