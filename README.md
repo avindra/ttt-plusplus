@@ -4,6 +4,8 @@
 
 Originally built at [code.google.com](http://code.google.com/p/ttt-plusplus).
 
+[❎ Click to play online (via WebAssembly)](https://avindra.github.io/#/ttt-plusplus)
+
 ## About
 
 This project aims to be the finest implementation of Tic-Tac-Toe around in C++.
