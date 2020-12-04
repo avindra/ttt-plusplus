@@ -100,10 +100,8 @@ bool winMain::winner(bool isComp) {
 	int winRar = Game::checkWinner(gameBoard);
 	if(winRar != 0)
 	{
-		if(QMessageBox::question(this, "We have a winner!", (isComp ? "The computer (" : "") + QString(winRar==1 ? "X" : "O") + (isComp ? ")" : "") + " wins!!\n\nPlay again?", QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
-			newGame();
-		else
-			qApp->quit();
+ 		taunt->setText((isComp ? "The computer (" : "") + QString(winRar==1 ? "X" : "O") + (isComp ? ")" : "") + " wins!!");
+		Game::endGame(gameBoard);
 		return true;
 	}
 	bool draw = true;
@@ -114,8 +112,8 @@ bool winMain::winner(bool isComp) {
 		}
 	}
 	if(draw) {
-		QMessageBox::information(this, "It's a draw!", "Nobody wins.");
-		newGame();
+		taunt->setText("It's a draw: nobody wins.");
+		Game::endGame(gameBoard);
 		return true;	
 	}
 	return false;

@@ -18,6 +18,8 @@ class btnSquare : public QPushButton
 		void setX();
 		// Mark this square with an O
 		void setO();
+		// destroy interactivity at game end
+		void disable();
 		// Reset this square.
 		void unset();
 

@@ -42,3 +42,14 @@ int Game::checkWinner(Board* board) {
 
 	return 0;
 }
+
+/**
+ * disable remaining squares (if any)
+ */
+void Game::endGame(Board* board) {
+	for(int i = 8; i >= 0; --i) {
+		if(board->get(i)->isEnabled()) {
+			board->get(i)->disable();
+		}
+	}
+}

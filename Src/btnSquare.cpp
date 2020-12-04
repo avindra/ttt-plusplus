@@ -12,6 +12,16 @@ btnSquare::~btnSquare() {
 
 }
 
+/**
+ * Called at the end of
+ * the game to prevent
+ * further play.
+ */
+void btnSquare::disable() {
+	this->setEnabled(false);
+	this->setStyleSheet(style + "background-color:gray;color:white;");
+}
+
 void btnSquare::setX() {
 	if(!this->isEnabled()) return;
 	state = 1;
