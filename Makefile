@@ -11,5 +11,9 @@ clean:
 info:
 	@echo Building with $(N_CPU) cores
 
-play:
+play: # Play using the native qt app
 	@./build/Src/ttt-plusplus
+
+loader: # Create an exportable qtloader (i.e., ESM+TS compat)
+	@wget https://github.com/qt/qtbase/raw/dev/src/plugins/platforms/wasm/qtloader.js
+	@patch -p1 < export-qtloader.patch

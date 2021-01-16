@@ -1,0 +1,16 @@
+diff --git a/qtloader.js.1 b/qtloader.js
+index b159cd6..74fb58b 100644
+--- a/qtloader.js.1
++++ b/qtloader.js
+@@ -128,9 +128,9 @@
+ //      Sets the logical font dpi for the application.
+ 
+ 
+-var Module = {}
++global.Module = {};
+ 
+-function QtLoader(config)
++export function QtLoader(config)
+ {
+     function webAssemblySupported() {
+         return typeof WebAssembly !== "undefined"
