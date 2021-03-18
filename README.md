@@ -25,7 +25,4 @@ The same people as my original project:
    * Programmers
      * Educators
      * Students
-
-## Contribute
-
-PRs are welcome. This is a fun little project, so requirements for joining aren't very strict at all, just demonstrate that you have an understanding of basic programming concepts.
+  
