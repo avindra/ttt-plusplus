@@ -1,28 +1,22 @@
 # ttt-plusplus
 
-:o2: Tic Tac Toe implemented using C++ and Qt
+:o2: Tic-Tac-Toe++: game and solution
 
-Originally built at [code.google.com](http://code.google.com/p/ttt-plusplus).
+Solver written in C++, based on mappings created through pure duress.
+
+The desktop and web frontend is built on version 5 of Qt, a highly portable GUI library.
 
 [❎ Click to play online (via WebAssembly)](https://avindra.github.io/#/ttt-plusplus)
 
 ## About
 
-This project aims to be the finest implementation of Tic-Tac-Toe around in C++.
-
-You may also be interested in the [C# version of this project](https://github.com/avindra/tic-tac-toe-dotnet), which this repository is based on.
+This project aims to be a solid reference example of a modern C++ Tic-Tac-Toe application, including a full solution to the game.
 
 ## Stack
 
 See the [ttt-plusplus wiki](https://github.com/avindra/ttt-plusplus/wiki) for information on software, building, testing, etc.
 
-## Who this is intended for
+## Archive
 
-The same people as my original project:
-
- * Gaming buffs
-   * Strategy buffs
-   * Programmers
-     * Educators
-     * Students
-  
+ * Originally built at [code.google.com](http://code.google.com/p/ttt-plusplus).
+ * [C# version](https://github.com/avindra/tic-tac-toe-dotnet), used to bootstrap the C++ codebase
